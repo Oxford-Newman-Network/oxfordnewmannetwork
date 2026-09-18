@@ -95,5 +95,8 @@ the site falls back to the content built into it.
 - The full text of the Pope's address to Oriel (News → the Oriel item → Longer extract).
 - A photograph from the Convergence panel or the exhibition.
 - Real names, roles and photographs on the People page.
-- The Oriel chapel window photograph is at present the watermarked Alamy copy;
-  replace it with the licensed file when you have it (`assets/stained-glass-oriel.jpg`).
+- The Oriel chapel window photograph. The watermarked Alamy copy has been removed and
+  the tile is now an empty frame on the home page — upload the photograph there once you
+  have it. Note there are two permissions on this one: the photographer's, and the artists'
+  in the window itself (designed by Vivienne Haig, realised by Douglas Hogg, installed
+  Easter 2001). Asking Oriel College clears both; a photograph you take yourself does not.
