@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/Oxford Newman Network.dc.html" },
+    { "source": "/admin", "destination": "/Admin.dc.html" }
+  ]
+}

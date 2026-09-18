@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Oxford Newman Network</title>
+<meta name="description" content="A network of scholars, students and friends of St John Henry Newman in Oxford and beyond — termly seminars, news and events.">
+<link rel="icon" href="./assets/onn-logo.png">
+<link rel="canonical" href="https://oxfordnewmannetwork.org/">
+<meta property="og:title" content="Oxford Newman Network">
+<meta property="og:description" content="Termly seminars on the life and works of St John Henry Newman, and news of Newman events in Oxford.">
+<meta property="og:url" content="https://oxfordnewmannetwork.org/">
+<meta property="og:image" content="https://oxfordnewmannetwork.org/assets/newman-vintner.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { background: #F4EEE2; color: #1E1B16; font-family: 'EB Garamond', Georgia, serif; -webkit-font-smoothing: antialiased; }
+  a { color: #7A1E2C; text-decoration: none; }
+  a:hover { color: #002147; text-decoration: underline; }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+</style>
+<script src="./config.js"></script>
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;background:#F4EEE2;">
+
+  <header style="background:#002147;color:#F4EEE2;">
+    <div style="max-width:1160px;margin:0 auto;padding:22px 28px 0;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 32px;">
+      <a href="#" onClick="{{ goHome }}" style="color:#F4EEE2;text-decoration:none;display:flex;align-items:center;gap:16px;">
+        <img src="./assets/onn-logo.png" alt="Oxford Newman Network" style="width:74px;height:74px;background:#F4EEE2;border-radius:50%;padding:5px;display:block;flex:none;">
+        <span style="display:flex;flex-direction:column;gap:4px;">
+          <span style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:31px;line-height:1;letter-spacing:.01em;">Oxford Newman Network</span>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#C9B27C;">Cor ad cor loquitur</span>
+        </span>
+      </a>
+      <a href="mailto:Newmanseminars@gmail.com" style="color:#C9B27C;font-size:15px;font-style:italic;padding-bottom:6px;">Newmanseminars@gmail.com</a>
+    </div>
+    <nav style="max-width:1160px;margin:0 auto;padding:18px 28px 0;display:flex;flex-wrap:wrap;gap:0 28px;border-bottom:1px solid rgba(201,178,124,.35);">
+      <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
+        <a href="#" onClick="{{ item.go }}" style="color: {{ item.color }};border-bottom: 2px solid {{ item.border }};font-family:'Cormorant Garamond',serif;font-weight:600;font-size:15px;letter-spacing:.14em;text-transform:uppercase;padding:0 0 12px;margin-bottom:-1px;text-decoration:none;">{{ item.label }}</a>
+      </sc-for>
+    </nav>
+  </header>
+
+  <main style="flex:1;">
+
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="Home" style="animation:rise .5s ease-out both;">
+      <div style="max-width:1160px;margin:0 auto;padding:44px 28px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:center;">
+        <div style="display:flex;flex-direction:column;justify-content:center;gap:22px;padding:8px 0 24px;">
+          <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">{{ home.kicker }}</p>
+          <blockquote style="margin:0;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:clamp(34px,4.6vw,58px);line-height:1.08;letter-spacing:-.01em;color:#002147;text-wrap:balance;">{{ home.quote }}</blockquote>
+          <p style="margin:0;font-size:20px;line-height:1.55;max-width:52ch;color:#3A352C;text-wrap:pretty;">{{ home.strapline }}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:6px;">
+            <a href="#" onClick="{{ goSeminars }}" style="display:inline-block;background:#7A1E2C;color:#F4EEE2;padding:13px 22px;font-size:15px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;" style-hover="background:#002147;color:#F4EEE2;">This term's seminars</a>
+            <a href="mailto:Newmanseminars@gmail.com?subject=Newsletter%20registration&amp;body=Please%20add%20me%20to%20the%20Oxford%20Newman%20Network%20newsletter." style="display:inline-block;border:1px solid #002147;color:#002147;padding:12px 22px;font-size:15px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;" style-hover="background:#002147;color:#F4EEE2;">Join the newsletter</a>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start;">
+          <img src="./assets/newman-vintner.jpg" alt="John Henry Newman, lithograph by J. A. Vintner, 1850, after a drawing by Maria Giberne, 1842" style="width:100%;max-width:460px;height:auto;display:block;border:10px solid #FFFDF8;box-shadow:0 20px 44px rgba(0,33,71,.22);">
+          <p style="margin:0;max-width:460px;font-size:14px;line-height:1.45;font-style:italic;color:#7A756A;">John Henry Newman. Lithograph by J. A. Vintner, 1850, after a drawing by Maria Giberne, 1842.</p>
+        </div>
+      </div>
+
+      <div style="max-width:1160px;margin:56px auto 0;padding:0 28px;">
+        <div style="border-top:1px solid #C9B27C;border-bottom:1px solid #C9B27C;padding:28px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px 40px;">
+          <div>
+            <p style="margin:0 0 8px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">Trinity · 1817</p>
+            <p style="margin:0;font-size:17px;line-height:1.5;color:#3A352C;">Newman came up to Trinity College at sixteen, and kept his rooms there in mind all his life.</p>
+          </div>
+          <div>
+            <p style="margin:0 0 8px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">Oriel · 1822</p>
+            <p style="margin:0;font-size:17px;line-height:1.5;color:#3A352C;">Elected Fellow of Oriel — the turning point, he said, of his life.</p>
+          </div>
+          <div>
+            <p style="margin:0 0 8px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">St Mary's · 1828–43</p>
+            <p style="margin:0;font-size:17px;line-height:1.5;color:#3A352C;">Vicar of the University Church, where his sermons drew Oxford to its four o'clock service.</p>
+          </div>
+          <div style="display:flex;align-items:flex-end;">
+            <a href="#" onClick="{{ goNewman }}" style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:15px;letter-spacing:.14em;text-transform:uppercase;">Newman at Oxford →</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="max-width:1160px;margin:56px auto 0;padding:0 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;">
+        <div>
+          <h2 style="margin:0 0 20px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:34px;line-height:1;color:#002147;">Next seminar</h2>
+          <div style="background:#002147;color:#F4EEE2;padding:30px 30px 28px;display:flex;flex-direction:column;gap:14px;">
+            <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#C9B27C;">{{ nextSeminar.when }}</p>
+            <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.15;font-style:italic;">{{ nextSeminar.title }}</p>
+            <p style="margin:0;font-size:18px;color:#D9D1C0;">{{ nextSeminar.speaker }}</p>
+            <p style="margin:6px 0 0;font-size:16px;color:#C9B27C;">{{ nextSeminar.where }}</p>
+          </div>
+          <p style="margin:16px 0 0;font-size:17px;color:#5A5348;line-height:1.5;">Seminars are open to all. <a href="mailto:Newmanseminars@gmail.com?subject=Newsletter%20registration">Join the newsletter</a> to receive each term's card and occasional notices of events, book launches and conferences.</p>
+        </div>
+        <div>
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:20px;">
+            <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:34px;line-height:1;color:#002147;">News</h2>
+            <a href="#" onClick="{{ goNews }}" style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:14px;letter-spacing:.14em;text-transform:uppercase;">All news →</a>
+          </div>
+          <div style="display:flex;flex-direction:column;">
+            <sc-for list="{{ latestNews }}" as="n" hint-placeholder-count="3">
+              <a href="#" onClick="{{ goNews }}" style="display:grid;grid-template-columns:86px 1fr;gap:18px;padding:16px 0;border-top:1px solid #D9CFB8;color:#1E1B16;text-decoration:none;" style-hover="color:#7A1E2C;">
+                <span style="font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#7A1E2C;line-height:1.5;padding-top:3px;">{{ n.date }}</span>
+                <span style="font-size:20px;line-height:1.35;">{{ n.title }}</span>
+              </a>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ isNews }}" hint-placeholder-val="{{ false }}">
+    <section data-screen-label="News" style="animation:rise .5s ease-out both;max-width:1160px;margin:0 auto;padding:48px 28px 0;">
+      <p style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">News</p>
+      <h1 style="margin:0 0 12px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,5vw,60px);line-height:1;color:#002147;">What is new in Newman</h1>
+      <p style="margin:0 0 40px;font-size:20px;line-height:1.5;max-width:60ch;color:#3A352C;">Proclamations, audiences, publications and gatherings — the events that mark Newman's place in the life of the Church, the colleges and the world of letters.</p>
+      <div style="display:flex;flex-direction:column;">
+        <sc-for list="{{ news }}" as="n" hint-placeholder-count="0">
+          <article style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px 44px;padding:38px 0;border-top:1px solid #C9B27C;align-items:start;">
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div style="position:relative;width:100%;height:300px;border:8px solid #FFFDF8;box-shadow:0 14px 30px rgba(0,33,71,.16);">
+                <image-slot id="{{ n.slot }}" src="{{ n.photo }}" shape="rect" placeholder="{{ n.imageHint }}" style="width:100%;height:100%;"></image-slot>
+              </div>
+              <p style="margin:0;font-size:13px;line-height:1.45;font-style:italic;color:#7A756A;">{{ n.caption }}</p>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#7A1E2C;">{{ n.date }} · {{ n.kind }}</p>
+              <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:32px;line-height:1.1;color:#002147;text-wrap:balance;">{{ n.title }}</h2>
+              <p style="margin:0;font-size:18px;line-height:1.55;color:#3A352C;text-wrap:pretty;">{{ n.body }}</p>
+              <sc-if value="{{ n.open }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:14px;margin-top:6px;border-left:3px solid #C9B27C;padding:6px 0 6px 20px;">
+                  <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#7A1E2C;">{{ n.extractLabel }}</p>
+                  <sc-for list="{{ n.extract }}" as="para" hint-placeholder-count="2">
+                    <p style="margin:0;font-size:18px;line-height:1.6;color:#3A352C;text-wrap:pretty;">{{ para }}</p>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <div style="display:flex;flex-wrap:wrap;gap:12px 26px;margin-top:6px;align-items:center;">
+                <sc-if value="{{ n.hasExtract }}" hint-placeholder-val="{{ true }}">
+                  <a href="#" onClick="{{ n.toggle }}" style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:14px;letter-spacing:.14em;text-transform:uppercase;">{{ n.toggleLabel }}</a>
+                </sc-if>
+                <a href="{{ n.href }}" target="_blank" rel="noopener" style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:#002147;">{{ n.linkLabel }} →</a>
+              </div>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ isSeminars }}" hint-placeholder-val="{{ false }}">
+    <section data-screen-label="Seminars" style="animation:rise .5s ease-out both;max-width:1160px;margin:0 auto;padding:48px 28px 0;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px 64px;align-items:start;">
+        <div>
+          <p style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">Seminars</p>
+          <h1 style="margin:0 0 18px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,5vw,60px);line-height:1;color:#002147;">The Newman Seminar</h1>
+          <p style="margin:0 0 14px;font-size:20px;line-height:1.5;color:#3A352C;text-wrap:pretty;">Each term the Network gathers for a series of papers on Newman — his theology, his prose and verse, his Oxford, his afterlife in the Church and the academy. Speakers come from across the colleges and from far beyond them; the audience is anyone with an interest, and questions are warmly encouraged.</p>
+          <p style="margin:0 0 14px;font-size:18px;line-height:1.5;color:#5A5348;">Seminars are free and open to all. Papers are followed by discussion and refreshments. In time we hope speakers may share the text of their papers here.</p>
+          <p style="margin:0;font-size:18px;line-height:1.5;color:#5A5348;">To receive the term card by email, write to <a href="mailto:Newmanseminars@gmail.com?subject=Newsletter%20registration">Newmanseminars@gmail.com</a>.</p>
+        </div>
+        <div>
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-bottom:2px solid #002147;padding-bottom:10px;margin-bottom:4px;">
+            <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;line-height:1;color:#002147;">{{ currentTerm }}</h2>
+            <span style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#7A1E2C;">Current term</span>
+          </div>
+          <sc-for list="{{ currentSeminars }}" as="s" hint-placeholder-count="3">
+            <div style="display:grid;grid-template-columns:96px 1fr;gap:18px;padding:18px 0;border-bottom:1px solid #D9CFB8;">
+              <div style="display:flex;flex-direction:column;gap:2px;">
+                <span style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#7A1E2C;">{{ s.week }}</span>
+                <span style="font-size:17px;color:#3A352C;">{{ s.date }}</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:4px;">
+                <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:23px;line-height:1.2;color:#002147;">{{ s.title }}</span>
+                <span style="font-size:17px;color:#3A352C;">{{ s.speaker }}</span>
+                <span style="font-size:15px;color:#7A756A;">{{ s.where }}</span>
+              </div>
+            </div>
+          </sc-for>
+          <p style="margin:14px 0 0;font-size:15px;color:#7A756A;font-style:italic;">Details of speakers and papers will be posted here as they are confirmed.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:64px;border-top:1px solid #C9B27C;padding-top:32px;">
+        <h2 style="margin:0 0 24px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;line-height:1;color:#002147;">Previous terms</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px 40px;">
+          <sc-for list="{{ pastTerms }}" as="t" hint-placeholder-count="3">
+            <div style="border-top:2px solid #002147;padding-top:14px;">
+              <p style="margin:0 0 6px;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:21px;color:#002147;">{{ t.term }}</p>
+              <p style="margin:0;font-size:17px;line-height:1.5;color:#5A5348;">{{ t.note }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ isNewman }}" hint-placeholder-val="{{ false }}">
+    <section data-screen-label="Newman at Oxford" style="animation:rise .5s ease-out both;max-width:1160px;margin:0 auto;padding:48px 28px 0;">
+      <p style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">Newman</p>
+      <h1 style="margin:0 0 16px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,5vw,60px);line-height:1;color:#002147;">Newman at Oxford</h1>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px 56px;align-items:start;">
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <p style="margin:0;font-size:20px;line-height:1.55;color:#3A352C;text-wrap:pretty;">Newman came up to Trinity College in June 1817, a boy of sixteen, and Oxford held him for the next twenty-eight years. He read widely and nervously, took a disappointing fourth in 1820, and then in 1822 was elected Fellow of Oriel — the event he called the turning point of his life.</p>
+          <p style="margin:0;font-size:18px;line-height:1.55;color:#3A352C;text-wrap:pretty;">As Vicar of St Mary the Virgin from 1828 he preached the sermons that emptied other churches at four o'clock on Sunday afternoons; as tutor, then as the leading voice of the Oxford Movement, he made the city the centre of a religious argument that ran through the 1830s. He left for Littlemore in 1842 and for Rome in 1845, and did not return for thirty-two years — coming back in 1878 as the first Honorary Fellow of Trinity, the college he had loved best.</p>
+          <p style="margin:0;font-size:18px;line-height:1.55;color:#5A5348;">Today a statue stands in the front quadrangle of Oriel and a bust in the garden at Trinity — the two colleges that between them shaped an Oxford life.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <img src="./assets/newman-preaching.jpg" alt="Newman preaching in the University Church of St Mary the Virgin" style="width:100%;height:auto;display:block;border:8px solid #FFFDF8;box-shadow:0 16px 34px rgba(0,33,71,.18);">
+          <p style="margin:0;font-size:13px;line-height:1.45;font-style:italic;color:#7A756A;">‘A Sketch from St Mary's’ — Newman at the lectern of the University Church.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <img src="./assets/bust-trinity.jpg" alt="Bust of Cardinal Newman at Trinity College, Oxford" style="width:100%;height:280px;object-fit:cover;display:block;">
+          <p style="margin:0;font-size:13px;font-style:italic;color:#7A756A;">The bust at Trinity College.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <img src="./assets/stained-glass-oriel.jpg" alt="Stained glass window of St John Henry Newman in the chapel at Oriel College" style="width:100%;height:280px;object-fit:cover;display:block;">
+          <p style="margin:0;font-size:13px;font-style:italic;color:#7A756A;">The window in the chapel at Oriel College.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="position:relative;width:100%;height:280px;">
+            <image-slot id="newman-oriel-statue" shape="rect" placeholder="Oriel statue — drop a photograph" style="width:100%;height:100%;"></image-slot>
+          </div>
+          <p style="margin:0;font-size:13px;font-style:italic;color:#7A756A;">The statue in the front quadrangle at Oriel.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:64px;border-top:1px solid #C9B27C;padding-top:30px;">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:8px;">
+          <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:36px;line-height:1;color:#002147;">Key dates</h2>
+          <span style="font-size:15px;font-style:italic;color:#7A756A;">A chronology of the Oxford years and after.</span>
+        </div>
+        <sc-for list="{{ chronology }}" as="era" hint-placeholder-count="4">
+          <div style="margin-top:36px;">
+            <div style="display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;border-bottom:2px solid #002147;padding-bottom:8px;">
+              <h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:24px;color:#002147;">{{ era.heading }}</h3>
+              <span style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#7A1E2C;">{{ era.span }}</span>
+            </div>
+            <div style="columns:2 320px;column-gap:48px;">
+              <sc-for list="{{ era.items }}" as="d" hint-placeholder-count="6">
+                <div style="display:grid;grid-template-columns:104px 1fr;gap:16px;padding:13px 0;border-bottom:1px solid #D9CFB8;align-items:baseline;break-inside:avoid;">
+                  <span style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:17px;letter-spacing:.03em;color:#7A1E2C;">{{ d.year }}</span>
+                  <span style="font-size:17px;line-height:1.45;color:#3A352C;text-wrap:pretty;">{{ d.what }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+        <p style="margin:26px 0 0;font-size:16px;line-height:1.5;font-style:italic;color:#7A756A;max-width:70ch;">The fuller chronology of Newman's Oxford years, with places and sources, is being prepared for this page.</p>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ isConferences }}" hint-placeholder-val="{{ false }}">
+    <section data-screen-label="Conferences" style="animation:rise .5s ease-out both;max-width:1160px;margin:0 auto;padding:48px 28px 0;">
+      <p style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">Conferences</p>
+      <h1 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,5vw,60px);line-height:1;color:#002147;">Conferences &amp; panels</h1>
+      <p style="margin:0 0 40px;font-size:20px;line-height:1.5;max-width:60ch;color:#3A352C;">Gatherings the Network hosts or takes part in, in Oxford and elsewhere.</p>
+      <div style="display:flex;flex-direction:column;">
+        <sc-for list="{{ conferences }}" as="c" hint-placeholder-count="2">
+          <article style="border-top:1px solid #C9B27C;padding:36px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px 48px;align-items:start;">
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#7A1E2C;">{{ c.when }} · {{ c.place }}</p>
+              <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:32px;line-height:1.1;color:#002147;text-wrap:balance;">{{ c.title }}</h2>
+              <p style="margin:0;font-size:18px;line-height:1.55;color:#3A352C;text-wrap:pretty;">{{ c.body }}</p>
+              <a href="{{ c.href }}" target="_blank" rel="noopener" style="margin-top:4px;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:14px;letter-spacing:.14em;text-transform:uppercase;">{{ c.linkLabel }} →</a>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#7A1E2C;">{{ c.listLabel }}</p>
+              <sc-for list="{{ c.people }}" as="p" hint-placeholder-count="4">
+                <p style="margin:0;padding:9px 0;border-bottom:1px solid #D9CFB8;font-size:17px;line-height:1.4;color:#3A352C;">{{ p }}</p>
+              </sc-for>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ isPeople }}" hint-placeholder-val="{{ false }}">
+    <section data-screen-label="People" style="animation:rise .5s ease-out both;max-width:1160px;margin:0 auto;padding:48px 28px 0;">
+      <p style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">People</p>
+      <h1 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,5vw,60px);line-height:1;color:#002147;">The Network</h1>
+      <p style="margin:0 0 40px;font-size:20px;line-height:1.5;max-width:62ch;color:#3A352C;text-wrap:pretty;">The Network is a company of friends rather than an institution: scholars, students, clergy and readers who care about Newman and meet to read him together. Names and short biographies will be added here with their owners' consent.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;border-top:1px solid #C9B27C;padding-top:36px;">
+        <sc-for list="{{ people }}" as="m" hint-placeholder-count="3">
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="position:relative;width:132px;height:132px;">
+              <image-slot id="{{ m.slot }}" src="{{ m.photo }}" shape="circle" placeholder="Photograph" style="width:100%;height:100%;"></image-slot>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:5px;">
+              <p style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;line-height:1.15;color:#002147;">{{ m.name }}</p>
+              <p style="margin:0;font-size:15px;letter-spacing:.02em;color:#7A1E2C;">{{ m.role }}</p>
+              <p style="margin:4px 0 0;font-size:17px;line-height:1.5;color:#3A352C;text-wrap:pretty;">{{ m.note }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <p style="margin:40px 0 0;font-size:18px;line-height:1.55;color:#5A5348;max-width:60ch;">If you would like to be listed, or to join the Network, write to <a href="mailto:Newmanseminars@gmail.com?subject=Joining%20the%20Oxford%20Newman%20Network">Newmanseminars@gmail.com</a>.</p>
+    </section>
+  </sc-if>
+
+  </main>
+
+  <footer style="margin-top:80px;background:#002147;color:#D9D1C0;">
+    <div style="max-width:1160px;margin:0 auto;padding:48px 28px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:36px 48px;align-items:start;">
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:34px;line-height:1;color:#F4EEE2;">Join the newsletter</h2>
+        <p style="margin:0;font-size:17px;line-height:1.55;max-width:44ch;">Term cards for the seminars, and occasional notices of events, book launches and conferences. We write a few times a term, never more.</p>
+        <a href="mailto:Newmanseminars@gmail.com?subject=Newsletter%20registration&amp;body=Please%20add%20me%20to%20the%20Oxford%20Newman%20Network%20newsletter." style="align-self:flex-start;margin-top:6px;display:inline-block;background:#C9B27C;color:#002147;padding:13px 22px;font-size:15px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;" style-hover="background:#F4EEE2;color:#002147;">Send your email address</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;font-size:17px;line-height:1.5;">
+        <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#C9B27C;">Contact</p>
+        <a href="mailto:Newmanseminars@gmail.com" style="color:#F4EEE2;">Newmanseminars@gmail.com</a>
+        <p style="margin:0;">Seminars are held in the MacGregor Room, Oriel College, Oxford.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#C9B27C;">Pages</p>
+        <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
+          <a href="#" onClick="{{ item.go }}" style="color:#D9D1C0;font-size:17px;">{{ item.label }}</a>
+        </sc-for>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(201,178,124,.3);">
+      <div style="max-width:1160px;margin:0 auto;padding:18px 28px 26px;display:flex;flex-wrap:wrap;gap:8px 32px;justify-content:space-between;font-size:14px;color:#9E9683;">
+        <p style="margin:0;">© Oxford Newman Network</p>
+        <p style="margin:0;font-style:italic;">Cor ad cor loquitur — heart speaks to heart</p>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;currentTerm&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Michaelmas Term 2026&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Seminars&quot;},&quot;homeNewsCount&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:3,&quot;min&quot;:1,&quot;max&quot;:4,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Home&quot;}}">
+class Component extends DCLogic {
+  state = { page: 'home', open: {}, content: null };
+
+  componentDidMount() {
+    import('./onn-data.js')
+      .then((m) => { this.defaults = m.DEFAULTS; return m.loadContent(); })
+      .then((content) => this.setState({ content }))
+      .catch(() => {});
+  }
+
+  news = [
+    {
+      id: 'oriel', date: '4 Sept 2026', kind: 'Papal audience',
+      title: 'Papal audience for the Provost, Fellows and members of Oriel College',
+      body: 'On Friday 4 September Pope Leo XIV met with the Provost, Fellows and members of Oriel College, Oxford — the college where Newman was elected Fellow in 1822, the event he called the turning point of his life.',
+      slot: 'news-oriel-delegation', photo: '', imageHint: 'Oriel delegation with Pope Leo',
+      caption: 'The Oriel delegation with Pope Leo XIV, 4 September 2026.',
+      extractLabel: 'Address of the Holy Father',
+      extract: [
+        'The text of the Pope\u2019s address to the delegation will be printed here in full, together with the statement made by the Provost of Oriel on the audience.',
+        'Both are linked below until the texts are set out on this page.'
+      ],
+      href: 'https://www.oriel.ox.ac.uk/news/statement-from-the-provost-on-the-papal-audience/',
+      linkLabel: 'Statement from the Provost'
+    },
+    {
+      id: 'convergence', date: '29 March 2026', kind: 'Conference panel',
+      title: 'Newman panel at the Convergence conference, ‘Seeds of New Hope’',
+      body: 'A special panel on John Henry Newman took place at Corpus Christi College, Oxford, co-hosted by the Oxford Newman Network. Starting from Pope Leo\u2019s homily for the proclamation, the panel spoke about how Newman\u2019s thinking can help in ‘drawing new maps of hope’ to navigate the challenges of a wounded world.',
+      slot: 'news-convergence-panel', photo: '', imageHint: 'Panel or exhibition photograph',
+      caption: 'A Newman exhibition of twenty-six large panels was hosted alongside the conference.',
+      extractLabel: 'Speakers',
+      extract: [
+        'Prof. Michael Hurley, Trinity College, Cambridge · Dr Rebekah Lamb, University of St Andrews · Dr Paul Shrimpton, Magdalen College School, Oxford.',
+        'Chair: Prof. Giuseppe Pezzini, Corpus Christi College, Oxford. Recordings of the presentations are available from the conference site.'
+      ],
+      href: 'https://convergenceuk.org/drawing-maps-of-new-hope', linkLabel: 'Hear the recordings'
+    },
+    {
+      id: 'doctor', date: '1 Nov 2025', kind: 'Proclamation',
+      title: 'Newman proclaimed Doctor of the Universal Church',
+      body: 'On the Solemnity of All Saints, Pope Leo XIV solemnly declared that, on account of his eminent teaching, St John Henry Newman was to be numbered among the Doctors of the Universal Church. Of the thirty-eight Doctors, the only other Englishman is Bede.',
+      slot: 'news-doctor', photo: './assets/doctor-of-the-church.jpg', imageHint: 'Proclamation photograph',
+      caption: 'The proclamation at Mass in St Peter\u2019s Square, 1 November 2025.',
+      extractLabel: 'From the homily of Pope Leo XIV',
+      extract: [
+        '‘Newman\u2019s impressive spiritual and cultural stature will surely serve as an inspiration to new generations whose hearts thirst for the infinite, and who, through research and knowledge, are willing to undertake that journey which, as the ancients said, takes us per aspera ad astra, through difficulties to the stars.’',
+        '‘The task of education is precisely to offer this Kindly Light to those who might otherwise remain imprisoned by the particularly insidious shadows of pessimism and fear. Let us disarm the false reasons for resignation and powerlessness, and let us share the great reasons for hope in today\u2019s world.’',
+        '‘We can say, then, that from a Christian perspective education helps everyone to become saints. Nothing less will do.’'
+      ],
+      href: 'https://www.vatican.va/content/leo-xiv/en/homilies/2025/documents/20251101-messa-giubileo-formatori.html',
+      linkLabel: 'Read the full homily'
+    },
+    {
+      id: 'copatron', date: '27 Oct 2025', kind: 'Proclamation',
+      title: 'Newman named Co-patron of the Church\u2019s educational mission',
+      body: 'Pope Leo XIV declared the author of The Idea of a University co-patron of the Church\u2019s educational mission alongside St Thomas Aquinas, in the Apostolic Letter ‘Seeds of Hope’ — a fitting charge for the founder of a university and of a school.',
+      slot: 'news-copatron', photo: './assets/copatron-education.jpg', imageHint: 'Portrait at St Peter\u2019s',
+      caption: 'Newman\u2019s portrait hung from the loggia of St Peter\u2019s.',
+      extractLabel: 'From ‘Seeds of Hope’',
+      extract: [
+        '‘Religious Truth is not only a portion, but a condition of general knowledge.’ These words of Saint John Henry Newman — whom, in the context of this Jubilee of the World of Education, I have the great joy of declaring co-patron of the Church\u2019s educational mission together with Saint Thomas Aquinas — are an invitation to renew our commitment to knowledge that is as intellectually responsible and rigorous as it is deeply human.',
+        '‘Cor ad cor loquitur was Saint John Henry Newman\u2019s cardinal\u2019s motto, taken from a letter of Saint Francis de Sales: “Sincerity of heart, not abundance of words, touches the hearts of men”.’',
+        '‘Following in the wake of the thought of Saint John Henry Newman, it goes against a strictly mercantilist approach that often forces education today to be measured in terms of functionality and practical utility.’'
+      ],
+      href: 'https://www.vatican.va/content/leo-xiv/en/apost_letters/documents/20251027-disegnare-nuove-mappe.html',
+      linkLabel: 'Read the Apostolic Letter'
+    }
+  ];
+
+  currentSeminars = [
+    { week: 'Week 3', date: '22 Oct', title: 'Paper to be confirmed', speaker: 'Speaker to be announced', where: 'MacGregor Room, Oriel College, 5.30 pm' },
+    { week: 'Week 5', date: '5 Nov', title: 'Paper to be confirmed', speaker: 'Speaker to be announced', where: 'MacGregor Room, Oriel College, 5.30 pm' },
+    { week: 'Week 7', date: '19 Nov', title: 'Paper to be confirmed', speaker: 'Speaker to be announced', where: 'MacGregor Room, Oriel College, 5.30 pm' }
+  ];
+
+  pastTerms = [
+    { term: 'Trinity Term 2026', note: 'Programme to be added.' },
+    { term: 'Hilary Term 2026', note: 'Programme to be added.' },
+    { term: 'Michaelmas Term 2025', note: 'Programme to be added.' }
+  ];
+
+  chronology = [
+    { heading: 'Before Oxford', span: '1801–1816', items: [
+      { year: '1801', what: 'Born in London, 21 February, the eldest child of John Newman, banker, and Jemima Fourdrinier.' },
+      { year: '1808', what: 'Sent to Dr Nicholas\u2019s school at Ealing.' },
+      { year: '1816', what: 'The failure of the family bank and a serious illness; the autumn of his first conversion, and of the conviction that it was the will of God he should lead a single life.' }
+    ]},
+    { heading: 'Trinity College', span: '1817–1822', items: [
+      { year: '1817', what: 'Matriculates at Trinity College in June, aged sixteen; comes into residence and wins a scholarship the following year.' },
+      { year: '1820', what: 'Overworked in the Schools, he takes a fourth class in Literae Humaniores.' },
+      { year: '1821', what: 'Remains in Oxford reading for a fellowship, supported by his Trinity scholarship.' }
+    ]},
+    { heading: 'Fellow and tutor of Oriel', span: '1822–1832', items: [
+      { year: '1822', what: 'Elected Fellow of Oriel College on 12 April — ‘the turning point of his life, and of a life not without turning points’.' },
+      { year: '1824', what: 'Ordained deacon in Christ Church Cathedral; curate of St Clement\u2019s, Oxford.' },
+      { year: '1825', what: 'Ordained priest; Vice-Principal of Alban Hall under Richard Whately.' },
+      { year: '1826', what: 'Appointed tutor of Oriel; begins the friendship with Hurrell Froude and Robert Wilberforce.' },
+      { year: '1828', what: 'Instituted Vicar of the University Church of St Mary the Virgin; the death of his sister Mary.' },
+      { year: '1830', what: 'Deprived of his tutorship after a dispute with the Provost over the pastoral care of undergraduates.' },
+      { year: '1831–32', what: 'Writes The Arians of the Fourth Century; preaches the parochial sermons that fill St Mary\u2019s on Sunday afternoons.' }
+    ]},
+    { heading: 'The Mediterranean and the Oxford Movement', span: '1832–1841', items: [
+      { year: '1832', what: 'Sails for the Mediterranean with the Froudes in December.' },
+      { year: '1833', what: 'Gravely ill in Sicily; writes ‘Lead, Kindly Light’ becalmed in the Straits of Bonifacio, June. Keble\u2019s Assize Sermon in July; Newman launches the Tracts for the Times in September.' },
+      { year: '1834', what: 'The first volume of Parochial and Plain Sermons.' },
+      { year: '1836', what: 'Death of Hurrell Froude; Newman becomes the acknowledged leader of the Movement.' },
+      { year: '1837', what: 'Lectures on the Prophetical Office of the Church.' },
+      { year: '1838', what: 'Editor of the British Critic.' },
+      { year: '1841', what: 'Tract 90 published in February and censured by the Heads of Houses; the bishops\u2019 charges follow.' }
+    ]},
+    { heading: 'Littlemore and the parting of friends', span: '1842–1845', items: [
+      { year: '1842', what: 'Retires to Littlemore with a small community; a life of study, fasting and prayer.' },
+      { year: '1843', what: 'Retracts his hard words against Rome; resigns the living of St Mary\u2019s and preaches ‘The Parting of Friends’ at Littlemore in September.' },
+      { year: '1845', what: 'Resigns his Oriel fellowship; received into the Catholic Church by Blessed Dominic Barberi at Littlemore on 9 October. Publishes An Essay on the Development of Christian Doctrine.' }
+    ]},
+    { heading: 'After Oxford', span: '1846–1890', items: [
+      { year: '1847', what: 'Ordained a Catholic priest in Rome; joins the Oratory of St Philip Neri.' },
+      { year: '1849', what: 'Founds the Birmingham Oratory.' },
+      { year: '1852', what: 'Delivers the lectures published as The Idea of a University; Rector of the Catholic University of Ireland from 1854.' },
+      { year: '1859', what: 'Founds the Oratory School at Edgbaston.' },
+      { year: '1864', what: 'Writes the Apologia Pro Vita Sua.' },
+      { year: '1870', what: 'An Essay in Aid of a Grammar of Assent.' },
+      { year: '1878', what: 'Elected the first Honorary Fellow of Trinity College and returns to Oxford after thirty-two years.' },
+      { year: '1879', what: 'Created Cardinal by Leo XIII, taking as his motto Cor ad cor loquitur.' },
+      { year: '1890', what: 'Dies at Edgbaston on 11 August; buried at Rednal. ‘Ex umbris et imaginibus in veritatem.’' }
+    ]},
+    { heading: 'The cause', span: '1958–2025', items: [
+      { year: '1958', what: 'The cause for his canonisation is opened.' },
+      { year: '1991', what: 'Declared Venerable by John Paul II.' },
+      { year: '2010', what: 'Beatified by Benedict XVI at Cofton Park, Birmingham, 19 September.' },
+      { year: '2019', what: 'Canonised by Pope Francis in Rome, 13 October.' },
+      { year: '2025', what: 'Proclaimed Doctor of the Universal Church and named co-patron of the Church\u2019s educational mission by Leo XIV.' }
+    ]}
+  ];
+
+  conferences = [
+    {
+      when: '29 March 2026', place: 'Corpus Christi College, Oxford',
+      title: '‘Drawing New Maps of Hope’: a panel on John Henry Newman',
+      body: 'A special panel co-hosted by the Oxford Newman Network at the Convergence conference, ‘Seeds of New Hope’. Starting from Pope Leo\u2019s homily for the proclamation of Newman as Doctor of the Church, the speakers asked how his thinking can help in drawing new maps of hope for a wounded world. A Newman exhibition of twenty-six large panels was shown alongside the conference.',
+      href: 'https://convergenceuk.org/drawing-maps-of-new-hope', linkLabel: 'Recordings of the presentations',
+      listLabel: 'Speakers and chair',
+      people: ['Prof. Michael Hurley — Trinity College, Cambridge', 'Dr Rebekah Lamb — University of St Andrews', 'Dr Paul Shrimpton — Magdalen College School, Oxford', 'Chair: Prof. Giuseppe Pezzini — Corpus Christi College, Oxford']
+    },
+    {
+      when: 'To be announced', place: 'Oxford',
+      title: 'A day conference on Newman and education',
+      body: 'Following the naming of Newman as co-patron of the Church\u2019s educational mission, the Network is preparing a day conference on The Idea of a University and on his practice as a tutor and schoolmaster. Details will be announced here and in the newsletter.',
+      href: 'mailto:Newmanseminars@gmail.com?subject=Newman%20and%20education%20conference', linkLabel: 'Ask to be kept informed',
+      listLabel: 'In preparation',
+      people: ['Call for papers — to follow', 'Venue and date — to be confirmed', 'Registration will open in the newsletter']
+    }
+  ];
+
+  people = [
+    { slot: 'person-1', photo: '', name: 'Name', role: 'Convenor', note: 'A short biography of two or three lines goes here.' },
+    { slot: 'person-2', photo: '', name: 'Name', role: 'Seminar secretary', note: 'A short biography of two or three lines goes here.' },
+    { slot: 'person-3', photo: '', name: 'Name', role: 'Member', note: 'A short biography of two or three lines goes here.' }
+  ];
+
+  go(page) {
+    return (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      this.setState({ page });
+      window.scrollTo(0, 0);
+    };
+  }
+
+  toggle(id) {
+    return (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      this.setState((s) => ({ open: Object.assign({}, s.open, { [id]: !s.open[id] }) }));
+    };
+  }
+
+  renderVals() {
+    const p = this.state.page;
+    const c = this.state.content || {};
+    const home = c.home || { kicker: 'St John Henry Newman \u00b7 1801\u20131890', quote: '\u201cI am a link in a chain, a bond of connexion between persons\u201d', strapline: 'A network of scholars, students and friends of Newman in Oxford and beyond \u2014 meeting for termly seminars, marking the life he began here, and sharing what is new in Newman studies.' };
+    const seminars = c.seminars || this.currentSeminars;
+    const pastTerms = c.pastTerms || this.pastTerms;
+    const newsSource = c.news || this.news;
+    const chronology = c.chronology || this.chronology;
+    const conferences = c.conferences || this.conferences;
+    const people = c.people || this.people;
+    const tabs = [['home', 'Home'], ['newman', 'Newman'], ['news', 'News'], ['seminars', 'Seminars'], ['conferences', 'Conferences'], ['people', 'People']];
+    const navItems = tabs.map(([id, label]) => ({
+      id, label, go: this.go(id),
+      color: p === id ? '#F4EEE2' : '#C9B27C',
+      border: p === id ? '#C9B27C' : 'transparent'
+    }));
+    const term = c.term || this.props.currentTerm || 'Michaelmas Term 2026';
+    const news = newsSource.map((n) => {
+      const open = !!this.state.open[n.id];
+      return Object.assign({}, n, {
+        open,
+        hasExtract: !!(n.extract && n.extract.length),
+        toggle: this.toggle(n.id),
+        toggleLabel: open ? 'Close' : (n.extractLabel || 'Read more')
+      });
+    });
+    const s0 = seminars[0] || { week: '', title: '', speaker: '', where: '' };
+    return {
+      navItems,
+      isHome: p === 'home', isNews: p === 'news', isSeminars: p === 'seminars',
+      isNewman: p === 'newman', isConferences: p === 'conferences', isPeople: p === 'people',
+      goHome: this.go('home'), goNews: this.go('news'), goSeminars: this.go('seminars'), goNewman: this.go('newman'),
+      home, news, latestNews: news.slice(0, this.props.homeNewsCount ?? 3),
+      currentTerm: term, currentSeminars: seminars, pastTerms: pastTerms,
+      chronology: chronology, conferences: conferences, people: people,
+      nextSeminar: { when: term + ' · ' + s0.week, title: s0.title, speaker: s0.speaker, where: s0.where }
+    };
+  }
+}
+</script>
+</body>
+</html>
