@@ -158,8 +158,8 @@ class Component extends DCLogic {
       note: 'The three pieces of writing at the top of the home page.',
       fields: [
         { key: 'kicker', label: 'Small line above the quotation', type: 'text' },
-        { key: 'quote', label: 'Quotation', type: 'area', rows: 3 },
-        { key: 'strapline', label: 'Description of the Network', type: 'area', rows: 4 }
+        { key: 'quote', label: 'Quotation', type: 'area', rows: 3, hint: 'Line breaks are kept exactly as you type them.' },
+        { key: 'strapline', label: 'Description of the Network', type: 'paras', rows: 4, hint: 'Leave a blank line between paragraphs.' }
       ]
     },
     term: {
@@ -184,7 +184,7 @@ class Component extends DCLogic {
       note: 'Listed at the foot of the seminars page.', titleKey: 'term',
       fields: [
         { key: 'term', label: 'Term', type: 'text' },
-        { key: 'note', label: 'Note', type: 'area', rows: 2 }
+        { key: 'items', label: 'The seminars', type: 'pairs', rows: 12, hint: 'One per line: the date, a vertical bar, then the speaker and paper. 4 May (2nd Week) | Dr Serenhedd James, Winchester College, \u2018Turncoat to Treasure: Newman and Punch\u2019' }
       ]
     },
     news: {
@@ -194,7 +194,7 @@ class Component extends DCLogic {
         { key: 'date', label: 'Date', type: 'text', hint: 'For example: 1 Nov 2025' },
         { key: 'kind', label: 'Kind', type: 'text', hint: 'For example: Proclamation, Papal audience' },
         { key: 'title', label: 'Headline', type: 'text' },
-        { key: 'body', label: 'The item', type: 'area', rows: 5 },
+        { key: 'body', label: 'The item', type: 'paras', rows: 5, hint: 'Leave a blank line between paragraphs.' },
         { key: 'photo', label: 'Photograph', type: 'image' },
         { key: 'caption', label: 'Caption under the photograph', type: 'text' },
         { key: 'extractLabel', label: 'Heading for the longer extract', type: 'text', hint: 'For example: From the homily of Pope Leo XIV. Leave empty for no extract.' },
@@ -219,7 +219,7 @@ class Component extends DCLogic {
         { key: 'when', label: 'Date', type: 'text' },
         { key: 'place', label: 'Place', type: 'text' },
         { key: 'title', label: 'Title', type: 'text' },
-        { key: 'body', label: 'Description', type: 'area', rows: 5 },
+        { key: 'body', label: 'Description', type: 'paras', rows: 5, hint: 'Leave a blank line between paragraphs.' },
         { key: 'href', label: 'Link', type: 'text' },
         { key: 'linkLabel', label: 'Words on the link', type: 'text' },
         { key: 'listLabel', label: 'Heading for the list beside it', type: 'text', hint: 'For example: Speakers and chair' },
@@ -232,7 +232,7 @@ class Component extends DCLogic {
       fields: [
         { key: 'name', label: 'Name', type: 'text' },
         { key: 'role', label: 'Role', type: 'text' },
-        { key: 'note', label: 'Short biography', type: 'area', rows: 3 },
+        { key: 'note', label: 'Biography', type: 'paras', rows: 5, hint: 'Leave a blank line between paragraphs.' },
         { key: 'photo', label: 'Photograph', type: 'image' }
       ]
     }

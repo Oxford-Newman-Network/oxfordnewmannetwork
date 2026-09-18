@@ -57,8 +57,12 @@
       <div style="max-width:1160px;margin:0 auto;padding:44px 28px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:center;">
         <div style="display:flex;flex-direction:column;justify-content:center;gap:22px;padding:8px 0 24px;">
           <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">{{ home.kicker }}</p>
-          <blockquote style="margin:0;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:clamp(34px,4.6vw,58px);line-height:1.08;letter-spacing:-.01em;color:#002147;text-wrap:balance;">{{ home.quote }}</blockquote>
-          <p style="margin:0;font-size:20px;line-height:1.55;max-width:52ch;color:#3A352C;text-wrap:pretty;">{{ home.strapline }}</p>
+          <blockquote style="margin:0;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:clamp(34px,4.6vw,58px);line-height:1.08;letter-spacing:-.01em;color:#002147;text-wrap:balance;white-space:pre-line;">{{ home.quote }}</blockquote>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <sc-for list="{{ home.strapline }}" as="para" hint-placeholder-count="1">
+              <p style="margin:0;font-size:20px;line-height:1.55;max-width:52ch;color:#3A352C;text-wrap:pretty;">{{ para }}</p>
+            </sc-for>
+          </div>
           <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:6px;">
             <a href="#" onClick="{{ goSeminars }}" style="display:inline-block;background:#7A1E2C;color:#F4EEE2;padding:13px 22px;font-size:15px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;" style-hover="background:#002147;color:#F4EEE2;">This term's seminars</a>
             <a href="mailto:Newmanseminars@gmail.com?subject=Newsletter%20registration&amp;body=Please%20add%20me%20to%20the%20Oxford%20Newman%20Network%20newsletter." style="display:inline-block;border:1px solid #002147;color:#002147;padding:12px 22px;font-size:15px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;" style-hover="background:#002147;color:#F4EEE2;">Join the newsletter</a>
@@ -136,7 +140,11 @@
             <div style="display:flex;flex-direction:column;gap:12px;">
               <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#7A1E2C;">{{ n.date }} · {{ n.kind }}</p>
               <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:32px;line-height:1.1;color:#002147;text-wrap:balance;">{{ n.title }}</h2>
-              <p style="margin:0;font-size:18px;line-height:1.55;color:#3A352C;text-wrap:pretty;">{{ n.body }}</p>
+              <div style="display:flex;flex-direction:column;gap:12px;">
+            <sc-for list="{{ n.body }}" as="para" hint-placeholder-count="1">
+              <p style="margin:0;font-size:18px;line-height:1.55;color:#3A352C;text-wrap:pretty;">{{ para }}</p>
+            </sc-for>
+          </div>
               <sc-if value="{{ n.open }}" hint-placeholder-val="{{ false }}">
                 <div style="display:flex;flex-direction:column;gap:14px;margin-top:6px;border-left:3px solid #C9B27C;padding:6px 0 6px 20px;">
                   <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#7A1E2C;">{{ n.extractLabel }}</p>
@@ -196,7 +204,12 @@
           <sc-for list="{{ pastTerms }}" as="t" hint-placeholder-count="3">
             <div style="border-top:2px solid #002147;padding-top:14px;">
               <p style="margin:0 0 6px;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:21px;color:#002147;">{{ t.term }}</p>
-              <p style="margin:0;font-size:17px;line-height:1.5;color:#5A5348;">{{ t.note }}</p>
+              <sc-for list="{{ t.items }}" as="s" hint-placeholder-count="4">
+                <div style="padding:11px 0;border-bottom:1px solid #D9CFB8;break-inside:avoid;">
+                  <p style="margin:0 0 3px;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:15px;letter-spacing:.04em;color:#7A1E2C;">{{ s.year }}</p>
+                  <p style="margin:0;font-size:16px;line-height:1.45;color:#5A5348;text-wrap:pretty;">{{ s.what }}</p>
+                </div>
+              </sc-for>
             </div>
           </sc-for>
         </div>
@@ -276,7 +289,11 @@
             <div style="display:flex;flex-direction:column;gap:12px;">
               <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#7A1E2C;">{{ c.when }} · {{ c.place }}</p>
               <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:32px;line-height:1.1;color:#002147;text-wrap:balance;">{{ c.title }}</h2>
-              <p style="margin:0;font-size:18px;line-height:1.55;color:#3A352C;text-wrap:pretty;">{{ c.body }}</p>
+              <div style="display:flex;flex-direction:column;gap:12px;">
+            <sc-for list="{{ c.body }}" as="para" hint-placeholder-count="1">
+              <p style="margin:0;font-size:18px;line-height:1.55;color:#3A352C;text-wrap:pretty;">{{ para }}</p>
+            </sc-for>
+          </div>
               <a href="{{ c.href }}" target="_blank" rel="noopener" style="margin-top:4px;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:14px;letter-spacing:.14em;text-transform:uppercase;">{{ c.linkLabel }} →</a>
             </div>
             <div style="display:flex;flex-direction:column;gap:10px;">
@@ -305,7 +322,11 @@
             <div style="display:flex;flex-direction:column;gap:5px;">
               <p style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;line-height:1.15;color:#002147;">{{ m.name }}</p>
               <p style="margin:0;font-size:15px;letter-spacing:.02em;color:#7A1E2C;">{{ m.role }}</p>
-              <p style="margin:4px 0 0;font-size:17px;line-height:1.5;color:#3A352C;text-wrap:pretty;">{{ m.note }}</p>
+              <div style="margin-top:4px;display:flex;flex-direction:column;gap:10px;">
+            <sc-for list="{{ m.note }}" as="para" hint-placeholder-count="1">
+              <p style="margin:0;font-size:17px;line-height:1.5;color:#3A352C;text-wrap:pretty;">{{ para }}</p>
+            </sc-for>
+          </div>
             </div>
           </div>
         </sc-for>
