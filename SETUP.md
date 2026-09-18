@@ -40,8 +40,8 @@ Supabase adds the ability to edit that content yourself from the admin page.
 
 1. Create a new repository on GitHub — `oxford-newman-network`, private or public as you prefer.
 2. Upload the files from this project into it (GitHub's web uploader is fine — drag them in):
-   `Oxford Newman Network.dc.html`, `Admin.dc.html`, `onn-data.js`, `config.js`,
-   `image-slot.js`, `support.js`, `vercel.json`, and the `assets` folder.
+   `index.html`, `admin.html`, `onn-data.js`, `config.js`,
+   `image-slot.js`, `support.js`, `vercel.json`, and the `assets` and `vendor` folders.
 3. Go to **vercel.com** (or Cloudflare Pages), sign in with GitHub, and **Import** that
    repository. There is nothing to build — accept the defaults and deploy.
 4. In Vercel: **Settings → Domains → Add**, and enter **oxfordnewmannetwork.org**.
