@@ -159,7 +159,9 @@ class Component extends DCLogic {
       fields: [
         { key: 'kicker', label: 'Small line above the quotation', type: 'text' },
         { key: 'quote', label: 'Quotation', type: 'area', rows: 3, hint: 'Line breaks are kept exactly as you type them.' },
-        { key: 'strapline', label: 'Description of the Network', type: 'paras', rows: 4, hint: 'Leave a blank line between paragraphs.' }
+        { key: 'strapline', label: 'Description of the Network', type: 'paras', rows: 4, hint: 'Leave a blank line between paragraphs.' },
+        { key: 'photo', label: 'Photograph', type: 'image', hint: 'Optional. Nothing shows on the site if you leave this empty.' },
+        { key: 'photoCaption', label: 'Caption under the photograph', type: 'text' }
       ]
     },
     term: {
@@ -176,7 +178,8 @@ class Component extends DCLogic {
         { key: 'date', label: 'Date', type: 'text', hint: 'For example: 22 Oct' },
         { key: 'title', label: 'Title of the paper', type: 'text' },
         { key: 'speaker', label: 'Speaker', type: 'text' },
-        { key: 'where', label: 'Place and time', type: 'text' }
+        { key: 'where', label: 'Place and time', type: 'text' },
+        { key: 'photo', label: 'Photograph', type: 'image', hint: 'Optional. Nothing shows on the site if you leave this empty.' }
       ]
     },
     pastTerms: {
@@ -223,7 +226,8 @@ class Component extends DCLogic {
         { key: 'href', label: 'Link', type: 'text' },
         { key: 'linkLabel', label: 'Words on the link', type: 'text' },
         { key: 'listLabel', label: 'Heading for the list beside it', type: 'text', hint: 'For example: Speakers and chair' },
-        { key: 'people', label: 'The list', type: 'lines', rows: 6, hint: 'One name or line each row.' }
+        { key: 'people', label: 'The list', type: 'lines', rows: 6, hint: 'One name or line each row.' },
+        { key: 'photo', label: 'Photograph', type: 'image', hint: 'Optional. Nothing shows on the site if you leave this empty.' }
       ]
     },
     people: {
@@ -301,9 +305,14 @@ class Component extends DCLogic {
       if (!file || !this.mod) return;
       this.setState({ status: 'Uploading the picture…' });
       this.mod.uploadImage(file).then((url) => {
-        const list = this.sectionValue(sectionKey).slice();
-        list[index] = Object.assign({}, list[index], { [fieldKey]: url });
-        this.setSectionValue(sectionKey, list);
+        const cur = this.sectionValue(sectionKey);
+        if (Array.isArray(cur)) {
+          const list = cur.slice();
+          list[index] = Object.assign({}, list[index], { [fieldKey]: url });
+          this.setSectionValue(sectionKey, list);
+        } else {
+          this.setSectionValue(sectionKey, Object.assign({}, cur, { [fieldKey]: url }));
+        }
         this.setState({ status: 'Picture added — press Save' });
       }).catch((err) => this.setState({ status: 'The picture would not upload: ' + (err.message || err) }));
     };

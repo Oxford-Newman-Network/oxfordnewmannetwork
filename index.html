@@ -27,7 +27,6 @@
   @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 </style>
 <script src="./config.js"></script>
-<script src="./image-slot.js"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column;background:#F4EEE2;">
@@ -69,8 +68,8 @@
           </div>
         </div>
         <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start;">
-          <img src="./assets/newman-vintner.jpg" alt="John Henry Newman, lithograph by J. A. Vintner, 1850, after a drawing by Maria Giberne, 1842" style="width:100%;max-width:460px;height:auto;display:block;border:10px solid #FFFDF8;box-shadow:0 20px 44px rgba(0,33,71,.22);">
-          <p style="margin:0;max-width:460px;font-size:14px;line-height:1.45;font-style:italic;color:#7A756A;">John Henry Newman. Lithograph by J. A. Vintner, 1850, after a drawing by Maria Giberne, 1842.</p>
+          <img src="{{ heroPhoto }}" alt="" style="width:100%;max-width:460px;height:auto;display:block;border:10px solid #FFFDF8;box-shadow:0 20px 44px rgba(0,33,71,.22);">
+          <p style="margin:0;max-width:460px;font-size:14px;line-height:1.45;font-style:italic;color:#7A756A;">{{ heroCaption }}</p>
         </div>
       </div>
 
@@ -132,9 +131,11 @@
         <sc-for list="{{ news }}" as="n" hint-placeholder-count="0">
           <article style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px 44px;padding:38px 0;border-top:1px solid #C9B27C;align-items:start;">
             <div style="display:flex;flex-direction:column;gap:8px;">
-              <div style="position:relative;width:100%;height:300px;border:8px solid #FFFDF8;box-shadow:0 14px 30px rgba(0,33,71,.16);">
-                <image-slot id="{{ n.slot }}" src="{{ n.photo }}" shape="rect" placeholder="{{ n.imageHint }}" style="width:100%;height:100%;"></image-slot>
-              </div>
+              <sc-if value="{{ n.hasPhoto }}" hint-placeholder-val="{{ true }}">
+                <div style="width:100%;height:300px;border:8px solid #FFFDF8;box-shadow:0 14px 30px rgba(0,33,71,.16);">
+                  <img src="{{ n.photo }}" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">
+                </div>
+              </sc-if>
               <p style="margin:0;font-size:13px;line-height:1.45;font-style:italic;color:#7A756A;">{{ n.caption }}</p>
             </div>
             <div style="display:flex;flex-direction:column;gap:12px;">
@@ -188,6 +189,9 @@
                 <span style="font-size:17px;color:#3A352C;">{{ s.date }}</span>
               </div>
               <div style="display:flex;flex-direction:column;gap:4px;">
+                <sc-if value="{{ s.hasPhoto }}" hint-placeholder-val="{{ false }}">
+                  <img src="{{ s.photo }}" alt="" style="width:72px;height:72px;border-radius:50%;object-fit:cover;display:block;margin-bottom:6px;">
+                </sc-if>
                 <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:23px;line-height:1.2;color:#002147;">{{ s.title }}</span>
                 <span style="font-size:17px;color:#3A352C;">{{ s.speaker }}</span>
                 <span style="font-size:15px;color:#7A756A;">{{ s.where }}</span>
@@ -238,18 +242,6 @@
           <img src="./assets/bust-trinity.jpg" alt="Bust of Cardinal Newman at Trinity College, Oxford" style="width:100%;height:280px;object-fit:cover;display:block;">
           <p style="margin:0;font-size:13px;font-style:italic;color:#7A756A;">The bust at Trinity College.</p>
         </div>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <div style="position:relative;width:100%;height:280px;">
-            <image-slot id="newman-oriel-window" shape="rect" placeholder="Oriel chapel window — drop a photograph" style="width:100%;height:100%;"></image-slot>
-          </div>
-          <p style="margin:0;font-size:13px;font-style:italic;color:#7A756A;">The window in the chapel at Oriel College.</p>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <div style="position:relative;width:100%;height:280px;">
-            <image-slot id="newman-oriel-statue" shape="rect" placeholder="Oriel statue — drop a photograph" style="width:100%;height:100%;"></image-slot>
-          </div>
-          <p style="margin:0;font-size:13px;font-style:italic;color:#7A756A;">The statue in the front quadrangle at Oriel.</p>
-        </div>
       </div>
 
       <div style="margin-top:64px;border-top:1px solid #C9B27C;padding-top:30px;">
@@ -287,6 +279,9 @@
         <sc-for list="{{ conferences }}" as="c" hint-placeholder-count="2">
           <article style="border-top:1px solid #C9B27C;padding:36px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px 48px;align-items:start;">
             <div style="display:flex;flex-direction:column;gap:12px;">
+              <sc-if value="{{ c.hasPhoto }}" hint-placeholder-val="{{ false }}">
+                <img src="{{ c.photo }}" alt="" style="width:100%;height:240px;object-fit:cover;display:block;border:8px solid #FFFDF8;box-shadow:0 14px 30px rgba(0,33,71,.16);margin-bottom:6px;">
+              </sc-if>
               <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#7A1E2C;">{{ c.when }} · {{ c.place }}</p>
               <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:32px;line-height:1.1;color:#002147;text-wrap:balance;">{{ c.title }}</h2>
               <div style="display:flex;flex-direction:column;gap:12px;">
@@ -316,9 +311,9 @@
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;border-top:1px solid #C9B27C;padding-top:36px;">
         <sc-for list="{{ people }}" as="m" hint-placeholder-count="3">
           <div style="display:flex;flex-direction:column;gap:12px;">
-            <div style="position:relative;width:132px;height:132px;">
-              <image-slot id="{{ m.slot }}" src="{{ m.photo }}" shape="circle" placeholder="Photograph" style="width:100%;height:100%;"></image-slot>
-            </div>
+            <sc-if value="{{ m.hasPhoto }}" hint-placeholder-val="{{ true }}">
+              <img src="{{ m.photo }}" alt="" style="width:132px;height:132px;border-radius:50%;object-fit:cover;display:block;">
+            </sc-if>
             <div style="display:flex;flex-direction:column;gap:5px;">
               <p style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;line-height:1.15;color:#002147;">{{ m.name }}</p>
               <p style="margin:0;font-size:15px;letter-spacing:.02em;color:#7A1E2C;">{{ m.role }}</p>
@@ -564,6 +559,7 @@ class Component extends DCLogic {
       const open = !!this.state.open[n.id];
       return Object.assign({}, n, {
         open,
+        hasPhoto: !!n.photo,
         hasExtract: !!(n.extract && n.extract.length),
         toggle: this.toggle(n.id),
         toggleLabel: open ? 'Close' : (n.extractLabel || 'Read more')
@@ -576,8 +572,14 @@ class Component extends DCLogic {
       isNewman: p === 'newman', isConferences: p === 'conferences', isPeople: p === 'people',
       goHome: this.go('home'), goNews: this.go('news'), goSeminars: this.go('seminars'), goNewman: this.go('newman'),
       home, news, latestNews: news.slice(0, this.props.homeNewsCount ?? 3),
-      currentTerm: term, currentSeminars: seminars, pastTerms: pastTerms,
-      chronology: chronology, conferences: conferences, people: people,
+      heroPhoto: (home && home.photo) || './assets/newman-vintner.jpg',
+      heroCaption: (home && home.photoCaption) || 'John Henry Newman. Lithograph by J. A. Vintner, 1850, after a drawing by Maria Giberne, 1842.',
+      currentTerm: term,
+      currentSeminars: seminars.map((x) => Object.assign({}, x, { hasPhoto: !!x.photo })),
+      pastTerms: pastTerms,
+      chronology: chronology,
+      conferences: conferences.map((x) => Object.assign({}, x, { hasPhoto: !!x.photo })),
+      people: people.map((x) => Object.assign({}, x, { hasPhoto: !!x.photo })),
       nextSeminar: { when: term + ' · ' + s0.week, title: s0.title, speaker: s0.speaker, where: s0.where }
     };
   }
