@@ -26,6 +26,16 @@
   a:hover { color: #002147; text-decoration: underline; }
   @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 </style>
+<script>
+  // A photograph that fails to load hides its frame rather than leaving an
+  // empty bordered box. Capture phase, because img error does not bubble.
+  document.addEventListener('error', function (e) {
+    var t = e.target;
+    if (!t || t.tagName !== 'IMG') return;
+    var frame = t.closest('[data-photo-frame]');
+    (frame || t).style.display = 'none';
+  }, true);
+</script>
 <script src="./config.js"></script>
 </helmet>
 
@@ -68,7 +78,7 @@
           </div>
         </div>
         <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start;">
-          <img src="{{ heroPhoto }}" alt="" style="width:100%;max-width:460px;height:auto;display:block;border:10px solid #FFFDF8;box-shadow:0 20px 44px rgba(0,33,71,.22);">
+          <img data-photo-frame src="{{ heroPhoto }}" alt="" style="width:100%;max-width:460px;height:auto;object-position:{{ heroFocus }};display:block;border:10px solid #FFFDF8;box-shadow:0 20px 44px rgba(0,33,71,.22);">
           <p style="margin:0;max-width:460px;font-size:14px;line-height:1.45;font-style:italic;color:#7A756A;">{{ heroCaption }}</p>
         </div>
       </div>
@@ -132,8 +142,8 @@
           <article style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px 44px;padding:38px 0;border-top:1px solid #C9B27C;align-items:start;">
             <div style="display:flex;flex-direction:column;gap:8px;">
               <sc-if value="{{ n.hasPhoto }}" hint-placeholder-val="{{ true }}">
-                <div style="width:100%;height:300px;border:8px solid #FFFDF8;box-shadow:0 14px 30px rgba(0,33,71,.16);">
-                  <img src="{{ n.photo }}" alt="" style="width:100%;height:100%;object-fit:cover;display:block;">
+                <div data-photo-frame style="width:100%;border:8px solid #FFFDF8;box-shadow:0 14px 30px rgba(0,33,71,.16);">
+                  <img src="{{ n.photo }}" alt="" style="width:100%;aspect-ratio:3 / 2;object-fit:cover;object-position:{{ n.focusPos }};display:block;">
                 </div>
               </sc-if>
               <p style="margin:0;font-size:13px;line-height:1.45;font-style:italic;color:#7A756A;">{{ n.caption }}</p>
@@ -190,7 +200,7 @@
               </div>
               <div style="display:flex;flex-direction:column;gap:4px;">
                 <sc-if value="{{ s.hasPhoto }}" hint-placeholder-val="{{ false }}">
-                  <img src="{{ s.photo }}" alt="" style="width:72px;height:72px;border-radius:50%;object-fit:cover;display:block;margin-bottom:6px;">
+                  <img src="{{ s.photo }}" alt="" style="width:72px;height:72px;border-radius:50%;object-fit:cover;object-position:{{ s.focusPos }};display:block;margin-bottom:6px;">
                 </sc-if>
                 <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:23px;line-height:1.2;color:#002147;">{{ s.title }}</span>
                 <span style="font-size:17px;color:#3A352C;">{{ s.speaker }}</span>
@@ -280,7 +290,7 @@
           <article style="border-top:1px solid #C9B27C;padding:36px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px 48px;align-items:start;">
             <div style="display:flex;flex-direction:column;gap:12px;">
               <sc-if value="{{ c.hasPhoto }}" hint-placeholder-val="{{ false }}">
-                <img src="{{ c.photo }}" alt="" style="width:100%;height:240px;object-fit:cover;display:block;border:8px solid #FFFDF8;box-shadow:0 14px 30px rgba(0,33,71,.16);margin-bottom:6px;">
+                <img data-photo-frame src="{{ c.photo }}" alt="" style="width:100%;aspect-ratio:3 / 2;object-fit:cover;object-position:{{ c.focusPos }};display:block;border:8px solid #FFFDF8;box-shadow:0 14px 30px rgba(0,33,71,.16);margin-bottom:6px;">
               </sc-if>
               <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#7A1E2C;">{{ c.when }} · {{ c.place }}</p>
               <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:32px;line-height:1.1;color:#002147;text-wrap:balance;">{{ c.title }}</h2>
@@ -312,7 +322,7 @@
         <sc-for list="{{ people }}" as="m" hint-placeholder-count="3">
           <div style="display:flex;flex-direction:column;gap:12px;">
             <sc-if value="{{ m.hasPhoto }}" hint-placeholder-val="{{ true }}">
-              <img src="{{ m.photo }}" alt="" style="width:132px;height:132px;border-radius:50%;object-fit:cover;display:block;">
+              <img src="{{ m.photo }}" alt="" style="width:132px;height:132px;border-radius:50%;object-fit:cover;object-position:{{ m.focusPos }};display:block;">
             </sc-if>
             <div style="display:flex;flex-direction:column;gap:5px;">
               <p style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;line-height:1.15;color:#002147;">{{ m.name }}</p>
@@ -560,11 +570,19 @@ class Component extends DCLogic {
       return Object.assign({}, n, {
         open,
         hasPhoto: !!n.photo,
+        focusPos: focusPos(n.focus, '50% 50%'),
         hasExtract: !!(n.extract && n.extract.length),
         toggle: this.toggle(n.id),
         toggleLabel: open ? 'Close' : (n.extractLabel || 'Read more')
       });
     });
+    const focusPos = (v, dflt) => {
+      const t = String(v == null ? '' : v).trim().toLowerCase();
+      if (t === 'top') return '50% 0%';
+      if (t === 'bottom') return '50% 100%';
+      if (t === 'centre' || t === 'center' || t === 'middle') return '50% 50%';
+      return dflt;
+    };
     const s0 = seminars[0] || { week: '', title: '', speaker: '', where: '' };
     return {
       navItems,
@@ -573,13 +591,14 @@ class Component extends DCLogic {
       goHome: this.go('home'), goNews: this.go('news'), goSeminars: this.go('seminars'), goNewman: this.go('newman'),
       home, news, latestNews: news.slice(0, this.props.homeNewsCount ?? 3),
       heroPhoto: (home && home.photo) || './assets/newman-vintner.jpg',
+      heroFocus: focusPos(home && home.focus, '50% 50%'),
       heroCaption: (home && home.photoCaption) || 'John Henry Newman. Lithograph by J. A. Vintner, 1850, after a drawing by Maria Giberne, 1842.',
       currentTerm: term,
-      currentSeminars: seminars.map((x) => Object.assign({}, x, { hasPhoto: !!x.photo })),
+      currentSeminars: seminars.map((x) => Object.assign({}, x, { hasPhoto: !!x.photo, focusPos: focusPos(x.focus, '50% 0%') })),
       pastTerms: pastTerms,
       chronology: chronology,
-      conferences: conferences.map((x) => Object.assign({}, x, { hasPhoto: !!x.photo })),
-      people: people.map((x) => Object.assign({}, x, { hasPhoto: !!x.photo })),
+      conferences: conferences.map((x) => Object.assign({}, x, { hasPhoto: !!x.photo, focusPos: focusPos(x.focus, '50% 50%') })),
+      people: people.map((x) => Object.assign({}, x, { hasPhoto: !!x.photo, focusPos: focusPos(x.focus, '50% 0%') })),
       nextSeminar: { when: term + ' · ' + s0.week, title: s0.title, speaker: s0.speaker, where: s0.where }
     };
   }

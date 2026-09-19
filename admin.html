@@ -120,7 +120,7 @@
                     <span style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;">
                       <span style="width:96px;height:96px;flex:none;border:1px solid #D9CFB8;background:#F4EEE2 center/cover no-repeat;background-image: {{ f.preview }};"></span>
                       <span style="display:flex;flex-direction:column;gap:8px;flex:1;min-width:220px;">
-                        <input type="text" value="{{ f.value }}" onChange="{{ f.onChange }}" placeholder="Paste a web address, or upload a picture" style="border:1px solid #D9CFB8;background:#FFFFFF;padding:10px 12px;font-size:16px;color:#1E1B16;width:100%;box-sizing:border-box;">
+                        <input type="text" value="{{ f.value }}" onChange="{{ f.onChange }}" placeholder="Upload a picture, or paste an address ending .jpg or .png" style="border:1px solid #D9CFB8;background:#FFFFFF;padding:10px 12px;font-size:16px;color:#1E1B16;width:100%;box-sizing:border-box;">
                         <input type="file" accept="image/*" onChange="{{ f.onUpload }}" style="font-size:15px;">
                       </span>
                     </span>
@@ -161,6 +161,7 @@ class Component extends DCLogic {
         { key: 'quote', label: 'Quotation', type: 'area', rows: 3, hint: 'Line breaks are kept exactly as you type them.' },
         { key: 'strapline', label: 'Description of the Network', type: 'paras', rows: 4, hint: 'Leave a blank line between paragraphs.' },
         { key: 'photo', label: 'Photograph', type: 'image', hint: 'Optional. Nothing shows on the site if you leave this empty.' },
+        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre or bottom. Empty means centre.' },
         { key: 'photoCaption', label: 'Caption under the photograph', type: 'text' }
       ]
     },
@@ -179,7 +180,8 @@ class Component extends DCLogic {
         { key: 'title', label: 'Title of the paper', type: 'text' },
         { key: 'speaker', label: 'Speaker', type: 'text' },
         { key: 'where', label: 'Place and time', type: 'text' },
-        { key: 'photo', label: 'Photograph', type: 'image', hint: 'Optional. Nothing shows on the site if you leave this empty.' }
+        { key: 'photo', label: 'Photograph', type: 'image', hint: 'Optional. Nothing shows on the site if you leave this empty.' },
+        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre or bottom. Empty means top, so faces are not cut off.' }
       ]
     },
     pastTerms: {
@@ -199,6 +201,7 @@ class Component extends DCLogic {
         { key: 'title', label: 'Headline', type: 'text' },
         { key: 'body', label: 'The item', type: 'paras', rows: 5, hint: 'Leave a blank line between paragraphs.' },
         { key: 'photo', label: 'Photograph', type: 'image' },
+        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre or bottom. Empty means centre.' },
         { key: 'caption', label: 'Caption under the photograph', type: 'text' },
         { key: 'extractLabel', label: 'Heading for the longer extract', type: 'text', hint: 'For example: From the homily of Pope Leo XIV. Leave empty for no extract.' },
         { key: 'extract', label: 'Longer extract', type: 'paras', rows: 8, hint: 'Leave a blank line between paragraphs.' },
@@ -227,7 +230,8 @@ class Component extends DCLogic {
         { key: 'linkLabel', label: 'Words on the link', type: 'text' },
         { key: 'listLabel', label: 'Heading for the list beside it', type: 'text', hint: 'For example: Speakers and chair' },
         { key: 'people', label: 'The list', type: 'lines', rows: 6, hint: 'One name or line each row.' },
-        { key: 'photo', label: 'Photograph', type: 'image', hint: 'Optional. Nothing shows on the site if you leave this empty.' }
+        { key: 'photo', label: 'Photograph', type: 'image', hint: 'Optional. Nothing shows on the site if you leave this empty.' },
+        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre or bottom. Empty means centre.' }
       ]
     },
     people: {
@@ -237,7 +241,8 @@ class Component extends DCLogic {
         { key: 'name', label: 'Name', type: 'text' },
         { key: 'role', label: 'Role', type: 'text' },
         { key: 'note', label: 'Biography', type: 'paras', rows: 5, hint: 'Leave a blank line between paragraphs.' },
-        { key: 'photo', label: 'Photograph', type: 'image' }
+        { key: 'photo', label: 'Photograph', type: 'image' },
+        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre or bottom. Empty means top, so faces are not cut off.' }
       ]
     }
   };
