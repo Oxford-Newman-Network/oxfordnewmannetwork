@@ -161,8 +161,9 @@ class Component extends DCLogic {
         { key: 'quote', label: 'Quotation', type: 'area', rows: 3, hint: 'Line breaks are kept exactly as you type them.' },
         { key: 'strapline', label: 'Description of the Network', type: 'paras', rows: 4, hint: 'Leave a blank line between paragraphs.' },
         { key: 'photo', label: 'Photograph', type: 'image', hint: 'Optional. Nothing shows on the site if you leave this empty.' },
-        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre or bottom. Empty means centre.' },
-        { key: 'photoCaption', label: 'Caption under the photograph', type: 'text' }
+        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre, bottom \u2014 or whole to show the entire picture.' },
+        { key: 'photoCaption', label: 'Caption under the photograph', type: 'text' },
+        { key: 'seminarLine', label: 'Line above the newsletter link', type: 'text' }
       ]
     },
     pageNewman: {
@@ -173,10 +174,11 @@ class Component extends DCLogic {
         { key: 'heading', label: 'Heading', type: 'text' },
         { key: 'paras', label: 'The writing', type: 'paras', rows: 10, hint: 'Leave a blank line between paragraphs.' },
         { key: 'photo', label: 'Main picture', type: 'image', hint: 'Optional. Nothing shows on the site if you leave this empty.' },
-        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre or bottom.' },
+        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre, bottom \u2014 or whole to show the entire picture.' },
         { key: 'photoCaption', label: 'Caption under the main picture', type: 'text' },
         { key: 'datesHeading', label: 'Heading above the chronology', type: 'text' },
-        { key: 'datesNote', label: 'Line beside that heading', type: 'text' }
+        { key: 'datesNote', label: 'Line beside that heading', type: 'text' },
+        { key: 'datesFootnote', label: 'Note below the chronology', type: 'text' }
       ]
     },
     newmanPictures: {
@@ -184,7 +186,7 @@ class Component extends DCLogic {
       note: 'The row of pictures below the writing. The bust at Trinity, the statue at Oriel, and any others.',
       fields: [
         { key: 'photo', label: 'Picture', type: 'image' },
-        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre or bottom.' },
+        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre, bottom \u2014 or whole to show the entire picture.' },
         { key: 'caption', label: 'Caption', type: 'text' }
       ]
     },
@@ -197,12 +199,21 @@ class Component extends DCLogic {
         { key: 'items', label: 'The dates', type: 'pairs', rows: 10, hint: 'One per line: the year, a vertical bar, then what happened. 1822 | Elected Fellow of Oriel College.' }
       ]
     },
+    homeCards: {
+      label: 'Home \u2014 three cards', title: 'The three cards on the home page', kind: 'list', add: 'Add a card',
+      note: 'The row of three across the middle of the home page.',
+      fields: [
+        { key: 'label', label: 'Small heading', type: 'text' },
+        { key: 'text', label: 'The writing', type: 'text' }
+      ]
+    },
     pageNews: {
       label: 'News', title: 'The News page', kind: 'object',
       note: 'The wording at the top of the News page.',
       fields: [
         { key: 'kicker', label: 'Small line above the heading', type: 'text' },
-        { key: 'heading', label: 'Heading', type: 'text' }
+        { key: 'heading', label: 'Heading', type: 'text' },
+        { key: 'note', label: 'The writing below the heading', type: 'text' }
       ]
     },
     news: {
@@ -214,7 +225,7 @@ class Component extends DCLogic {
         { key: 'title', label: 'Headline', type: 'text' },
         { key: 'body', label: 'The item', type: 'paras', rows: 5, hint: 'Leave a blank line between paragraphs.' },
         { key: 'photo', label: 'Photograph', type: 'image' },
-        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre or bottom. Empty means centre.' },
+        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre, bottom \u2014 or whole to show the entire picture.' },
         { key: 'caption', label: 'Caption under the photograph', type: 'text' },
         { key: 'extractLabel', label: 'Heading for the longer extract', type: 'text', hint: 'For example: From the homily of Pope Leo XIV. Leave empty for no extract.' },
         { key: 'extract', label: 'Longer extract', type: 'paras', rows: 8, hint: 'Leave a blank line between paragraphs.' },
@@ -228,7 +239,9 @@ class Component extends DCLogic {
       fields: [
         { key: 'kicker', label: 'Small line above the heading', type: 'text' },
         { key: 'heading', label: 'Heading', type: 'text' },
-        { key: 'note', label: 'Line below the heading', type: 'text' }
+        { key: 'note', label: 'Line below the heading', type: 'text' },
+        { key: 'blurb', label: 'The writing below that', type: 'text' },
+        { key: 'termNote', label: 'Note under the current term', type: 'text' }
       ]
     },
     term: {
@@ -247,7 +260,7 @@ class Component extends DCLogic {
         { key: 'speaker', label: 'Speaker', type: 'text' },
         { key: 'where', label: 'Place and time', type: 'text' },
         { key: 'photo', label: 'Photograph', type: 'image', hint: 'Optional. Nothing shows on the site if you leave this empty.' },
-        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre or bottom. Empty means top, so faces are not cut off.' }
+        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre, bottom \u2014 or whole to show the entire picture.' }
       ]
     },
     pastTerms: {
@@ -280,7 +293,17 @@ class Component extends DCLogic {
         { key: 'listLabel', label: 'Heading for the list beside it', type: 'text', hint: 'For example: Speakers and chair' },
         { key: 'people', label: 'The list', type: 'lines', rows: 6, hint: 'One name or line each row.' },
         { key: 'photo', label: 'Photograph', type: 'image', hint: 'Optional. Nothing shows on the site if you leave this empty.' },
-        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre or bottom. Empty means centre.' }
+        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre, bottom \u2014 or whole to show the entire picture.' }
+      ]
+    },
+    footer: {
+      label: 'Footer', title: 'The blue band at the foot of every page', kind: 'object',
+      note: 'The newsletter wording, the button, and the contact address.',
+      fields: [
+        { key: 'newsletterHeading', label: 'Heading', type: 'text' },
+        { key: 'newsletterText', label: 'The writing', type: 'area', rows: 3 },
+        { key: 'buttonLabel', label: 'Wording on the gold button', type: 'text', hint: 'Showing the address itself helps anyone whose computer cannot open an email program.' },
+        { key: 'contactEmail', label: 'Contact email address', type: 'text', hint: 'Used by the button, the contact line, and every write-to link on the site.' }
       ]
     },
     pagePeople: {
@@ -289,7 +312,8 @@ class Component extends DCLogic {
       fields: [
         { key: 'kicker', label: 'Small line above the heading', type: 'text' },
         { key: 'heading', label: 'Heading', type: 'text' },
-        { key: 'intro', label: 'The writing below the heading', type: 'paras', rows: 5, hint: 'Leave a blank line between paragraphs.' }
+        { key: 'intro', label: 'The writing below the heading', type: 'paras', rows: 5, hint: 'Leave a blank line between paragraphs.' },
+        { key: 'joinLine', label: 'Line above the email address', type: 'text' }
       ]
     },
     people: {
@@ -300,17 +324,18 @@ class Component extends DCLogic {
         { key: 'role', label: 'Role', type: 'text' },
         { key: 'note', label: 'Biography', type: 'paras', rows: 5, hint: 'Leave a blank line between paragraphs.' },
         { key: 'photo', label: 'Photograph', type: 'image' },
-        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre or bottom. Empty means top, so faces are not cut off.' }
+        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre, bottom \u2014 or whole to show the entire picture.' }
       ]
     }
   };
 
-  order = ['home',
+  order = ['home', 'homeCards',
     'pageNewman', 'newmanPictures', 'chronology',
     'pageNews', 'news',
     'pageSeminars', 'term', 'seminars', 'pastTerms',
     'pageConferences', 'conferences',
-    'pagePeople', 'people'];
+    'pagePeople', 'people',
+    'footer'];
 
   componentDidMount() {
     import('./onn-data.js').then((m) => {

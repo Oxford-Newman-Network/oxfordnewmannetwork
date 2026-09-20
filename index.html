@@ -50,7 +50,7 @@
           <span style="font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#C9B27C;">Cor ad cor loquitur</span>
         </span>
       </a>
-      <a href="mailto:Newmanseminars@gmail.com" style="color:#C9B27C;font-size:15px;font-style:italic;padding-bottom:6px;">Newmanseminars@gmail.com</a>
+      <a href="mailto:{{ footer.contactEmail }}" style="color:#C9B27C;font-size:15px;font-style:italic;padding-bottom:6px;">{{ footer.contactEmail }}</a>
     </div>
     <nav style="max-width:1160px;margin:0 auto;padding:18px 28px 0;display:flex;flex-wrap:wrap;gap:0 28px;border-bottom:1px solid rgba(201,178,124,.35);">
       <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
@@ -74,7 +74,7 @@
           </div>
           <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:6px;">
             <a href="#" onClick="{{ goSeminars }}" style="display:inline-block;background:#7A1E2C;color:#F4EEE2;padding:13px 22px;font-size:15px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;" style-hover="background:#002147;color:#F4EEE2;">This term's seminars</a>
-            <a href="mailto:Newmanseminars@gmail.com?subject=Newsletter%20registration&amp;body=Please%20add%20me%20to%20the%20Oxford%20Newman%20Network%20newsletter." style="display:inline-block;border:1px solid #002147;color:#002147;padding:12px 22px;font-size:15px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;" style-hover="background:#002147;color:#F4EEE2;">Join the newsletter</a>
+            <a href="mailto:{{ footer.contactEmail }}?subject=Newsletter%20registration&amp;body=Please%20add%20me%20to%20the%20Oxford%20Newman%20Network%20newsletter." style="display:inline-block;border:1px solid #002147;color:#002147;padding:12px 22px;font-size:15px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;" style-hover="background:#002147;color:#F4EEE2;">Join the newsletter</a>
           </div>
         </div>
         <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start;">
@@ -85,19 +85,13 @@
 
       <div style="max-width:1160px;margin:56px auto 0;padding:0 28px;">
         <div style="border-top:1px solid #C9B27C;border-bottom:1px solid #C9B27C;padding:28px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px 40px;">
-          <div>
-            <p style="margin:0 0 8px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">Trinity · 1817</p>
-            <p style="margin:0;font-size:17px;line-height:1.5;color:#3A352C;">Newman came up to Trinity College at sixteen, and kept his rooms there in mind all his life.</p>
+        <sc-for list="{{ homeCards }}" as="card" hint-placeholder-count="3">
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#7A1E2C;">{{ card.label }}</p>
+            <p style="margin:0;font-size:17px;line-height:1.5;color:#3A352C;text-wrap:pretty;">{{ card.text }}</p>
           </div>
-          <div>
-            <p style="margin:0 0 8px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">Oriel · 1822</p>
-            <p style="margin:0;font-size:17px;line-height:1.5;color:#3A352C;">Elected Fellow of Oriel — the turning point, he said, of his life.</p>
-          </div>
-          <div>
-            <p style="margin:0 0 8px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">St Mary's · 1828–43</p>
-            <p style="margin:0;font-size:17px;line-height:1.5;color:#3A352C;">Vicar of the University Church, where his sermons drew Oxford to its four o'clock service.</p>
-          </div>
-          <div style="display:flex;align-items:flex-end;">
+        </sc-for>
+      
             <a href="#" onClick="{{ goNewman }}" style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:15px;letter-spacing:.14em;text-transform:uppercase;">Newman at Oxford →</a>
           </div>
         </div>
@@ -112,7 +106,7 @@
             <p style="margin:0;font-size:18px;color:#D9D1C0;">{{ nextSeminar.speaker }}</p>
             <p style="margin:6px 0 0;font-size:16px;color:#C9B27C;">{{ nextSeminar.where }}</p>
           </div>
-          <p style="margin:16px 0 0;font-size:17px;color:#5A5348;line-height:1.5;">Seminars are open to all. <a href="mailto:Newmanseminars@gmail.com?subject=Newsletter%20registration">Join the newsletter</a> to receive each term's card and occasional notices of events, book launches and conferences.</p>
+          <p style="margin:16px 0 0;font-size:17px;color:#5A5348;line-height:1.5;">{{ home.seminarLine }}<a href="mailto:{{ footer.contactEmail }}?subject=Newsletter%20registration">Join the newsletter</a> to receive each term's card and occasional notices of events, book launches and conferences.</p>
         </div>
         <div>
           <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:20px;">
@@ -136,14 +130,14 @@
     <section data-screen-label="News" style="animation:rise .5s ease-out both;max-width:1160px;margin:0 auto;padding:48px 28px 0;">
       <p style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">{{ pageNews.kicker }}</p>
       <h1 style="margin:0 0 12px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,5vw,60px);line-height:1;color:#002147;">{{ pageNews.heading }}</h1>
-      <p style="margin:0 0 40px;font-size:20px;line-height:1.5;max-width:60ch;color:#3A352C;">Proclamations, audiences, publications and gatherings — the events that mark Newman's place in the life of the Church, the colleges and the world of letters.</p>
+      <p style="margin:0 0 40px;font-size:20px;line-height:1.5;max-width:60ch;color:#3A352C;">{{ pageNews.note }}</p>
       <div style="display:flex;flex-direction:column;">
         <sc-for list="{{ news }}" as="n" hint-placeholder-count="0">
           <article style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px 44px;padding:38px 0;border-top:1px solid #C9B27C;align-items:start;">
             <div style="display:flex;flex-direction:column;gap:8px;">
               <sc-if value="{{ n.hasPhoto }}" hint-placeholder-val="{{ true }}">
                 <div data-photo-frame style="width:100%;border:8px solid #FFFDF8;box-shadow:0 14px 30px rgba(0,33,71,.16);">
-                  <img src="{{ n.photo }}" alt="" style="width:100%;aspect-ratio:3 / 2;object-fit:cover;object-position:{{ n.focusPos }};display:block;">
+                  <img src="{{ n.photo }}" alt="" style="width:100%;aspect-ratio:3 / 2;object-fit:{{ n.fit }};object-position:{{ n.focusPos }};display:block;">
                 </div>
               </sc-if>
               <p style="margin:0;font-size:13px;line-height:1.45;font-style:italic;color:#7A756A;">{{ n.caption }}</p>
@@ -184,8 +178,8 @@
           <p style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">{{ pageSeminars.kicker }}</p>
           <h1 style="margin:0 0 18px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,5vw,60px);line-height:1;color:#002147;">{{ pageSeminars.heading }}</h1>
           <p style="margin:0 0 14px;font-size:20px;line-height:1.5;color:#3A352C;text-wrap:pretty;">Each term the Network gathers for a series of papers on Newman — his theology, his prose and verse, his Oxford, his afterlife in the Church and the academy. Speakers come from across the colleges and from far beyond them; the audience is anyone with an interest, and questions are warmly encouraged.</p>
-          <p style="margin:0 0 14px;font-size:18px;line-height:1.5;color:#5A5348;">Seminars are free and open to all. Papers are followed by discussion and refreshments. In time we hope speakers may share the text of their papers here.</p>
-          <p style="margin:0;font-size:18px;line-height:1.5;color:#5A5348;">{{ pageSeminars.note }} <a href="mailto:Newmanseminars@gmail.com?subject=Newsletter%20registration">Newmanseminars@gmail.com</a>.</p>
+          <p style="margin:0 0 14px;font-size:18px;line-height:1.5;color:#5A5348;">{{ pageSeminars.blurb }}</p>
+          <p style="margin:0;font-size:18px;line-height:1.5;color:#5A5348;">{{ pageSeminars.note }} <a href="mailto:{{ footer.contactEmail }}?subject=Newsletter%20registration">{{ footer.contactEmail }}</a>.</p>
         </div>
         <div>
           <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-bottom:2px solid #002147;padding-bottom:10px;margin-bottom:4px;">
@@ -200,7 +194,7 @@
               </div>
               <div style="display:flex;flex-direction:column;gap:4px;">
                 <sc-if value="{{ s.hasPhoto }}" hint-placeholder-val="{{ false }}">
-                  <img src="{{ s.photo }}" alt="" style="width:72px;height:72px;border-radius:50%;object-fit:cover;object-position:{{ s.focusPos }};display:block;margin-bottom:6px;">
+                  <img src="{{ s.photo }}" alt="" style="width:72px;height:72px;border-radius:50%;object-fit:{{ s.fit }};object-position:{{ s.focusPos }};display:block;margin-bottom:6px;">
                 </sc-if>
                 <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:23px;line-height:1.2;color:#002147;">{{ s.title }}</span>
                 <span style="font-size:17px;color:#3A352C;">{{ s.speaker }}</span>
@@ -208,7 +202,7 @@
               </div>
             </div>
           </sc-for>
-          <p style="margin:14px 0 0;font-size:15px;color:#7A756A;font-style:italic;">Details of speakers and papers will be posted here as they are confirmed.</p>
+          <p style="margin:14px 0 0;font-size:15px;color:#7A756A;font-style:italic;">{{ pageSeminars.termNote }}</p>
         </div>
       </div>
 
@@ -242,7 +236,7 @@
           </sc-for>
         </div>
         <div style="display:flex;flex-direction:column;gap:10px;">
-          <img data-photo-frame src="{{ pageNewman.photo }}" alt="" style="width:100%;height:auto;display:block;object-position:{{ pageNewman.focusPos }};border:8px solid #FFFDF8;box-shadow:0 14px 30px rgba(0,33,71,.16);">
+          <img data-photo-frame src="{{ pageNewman.photo }}" alt="" style="width:100%;aspect-ratio:4 / 5;object-fit:{{ pageNewman.fit }};object-position:{{ pageNewman.focusPos }};display:block;border:8px solid #FFFDF8;box-shadow:0 14px 30px rgba(0,33,71,.16);">
           <p style="margin:0;font-size:13px;line-height:1.45;font-style:italic;color:#7A756A;">{{ pageNewman.photoCaption }}</p>
         </div>
       </div>
@@ -250,7 +244,7 @@
       <div style="margin-top:48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;">
         <sc-for list="{{ newmanPictures }}" as="pic" hint-placeholder-count="2">
           <div style="display:flex;flex-direction:column;gap:8px;">
-            <img data-photo-frame src="{{ pic.photo }}" alt="" style="width:100%;height:280px;object-fit:cover;object-position:{{ pic.focusPos }};display:block;">
+            <img data-photo-frame src="{{ pic.photo }}" alt="" style="width:100%;height:280px;object-fit:{{ pic.fit }};object-position:{{ pic.focusPos }};display:block;">
             <p style="margin:0;font-size:13px;font-style:italic;color:#7A756A;">{{ pic.caption }}</p>
           </div>
         </sc-for>
@@ -277,7 +271,7 @@
             </div>
           </div>
         </sc-for>
-        <p style="margin:26px 0 0;font-size:16px;line-height:1.5;font-style:italic;color:#7A756A;max-width:70ch;">The fuller chronology of Newman's Oxford years, with places and sources, is being prepared for this page.</p>
+        <p style="margin:26px 0 0;font-size:16px;line-height:1.5;font-style:italic;color:#7A756A;max-width:70ch;">{{ pageNewman.datesFootnote }}</p>
       </div>
     </section>
   </sc-if>
@@ -292,7 +286,7 @@
           <article style="border-top:1px solid #C9B27C;padding:36px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px 48px;align-items:start;">
             <div style="display:flex;flex-direction:column;gap:12px;">
               <sc-if value="{{ c.hasPhoto }}" hint-placeholder-val="{{ false }}">
-                <img data-photo-frame src="{{ c.photo }}" alt="" style="width:100%;aspect-ratio:3 / 2;object-fit:cover;object-position:{{ c.focusPos }};display:block;border:8px solid #FFFDF8;box-shadow:0 14px 30px rgba(0,33,71,.16);margin-bottom:6px;">
+                <img data-photo-frame src="{{ c.photo }}" alt="" style="width:100%;aspect-ratio:3 / 2;object-fit:{{ c.fit }};object-position:{{ c.focusPos }};display:block;border:8px solid #FFFDF8;box-shadow:0 14px 30px rgba(0,33,71,.16);margin-bottom:6px;">
               </sc-if>
               <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#7A1E2C;">{{ c.when }} · {{ c.place }}</p>
               <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:32px;line-height:1.1;color:#002147;text-wrap:balance;">{{ c.title }}</h2>
@@ -328,7 +322,7 @@
         <sc-for list="{{ people }}" as="m" hint-placeholder-count="3">
           <div style="display:flex;flex-direction:column;gap:12px;">
             <sc-if value="{{ m.hasPhoto }}" hint-placeholder-val="{{ true }}">
-              <img src="{{ m.photo }}" alt="" style="width:132px;height:132px;border-radius:50%;object-fit:cover;object-position:{{ m.focusPos }};display:block;">
+              <img src="{{ m.photo }}" alt="" style="width:132px;height:132px;border-radius:50%;object-fit:{{ m.fit }};object-position:{{ m.focusPos }};display:block;">
             </sc-if>
             <div style="display:flex;flex-direction:column;gap:5px;">
               <p style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;line-height:1.15;color:#002147;">{{ m.name }}</p>
@@ -342,7 +336,7 @@
           </div>
         </sc-for>
       </div>
-      <p style="margin:40px 0 0;font-size:18px;line-height:1.55;color:#5A5348;max-width:60ch;">If you would like to be listed, or to join the Network, write to <a href="mailto:Newmanseminars@gmail.com?subject=Joining%20the%20Oxford%20Newman%20Network">Newmanseminars@gmail.com</a>.</p>
+      <p style="margin:40px 0 0;font-size:18px;line-height:1.55;color:#5A5348;max-width:60ch;">{{ pagePeople.joinLine }}<a href="mailto:{{ footer.contactEmail }}?subject=Joining%20the%20Oxford%20Newman%20Network">{{ footer.contactEmail }}</a>.</p>
     </section>
   </sc-if>
 
@@ -351,13 +345,13 @@
   <footer style="margin-top:80px;background:#002147;color:#D9D1C0;">
     <div style="max-width:1160px;margin:0 auto;padding:48px 28px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:36px 48px;align-items:start;">
       <div style="display:flex;flex-direction:column;gap:12px;">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:34px;line-height:1;color:#F4EEE2;">Join the newsletter</h2>
-        <p style="margin:0;font-size:17px;line-height:1.55;max-width:44ch;">Term cards for the seminars, and occasional notices of events, book launches and conferences. We write a few times a term, never more.</p>
-        <a href="mailto:Newmanseminars@gmail.com?subject=Newsletter%20registration&amp;body=Please%20add%20me%20to%20the%20Oxford%20Newman%20Network%20newsletter." style="align-self:flex-start;margin-top:6px;display:inline-block;background:#C9B27C;color:#002147;padding:13px 22px;font-size:15px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;" style-hover="background:#F4EEE2;color:#002147;">Send your email address</a>
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:34px;line-height:1;color:#F4EEE2;">{{ footer.newsletterHeading }}</h2>
+        <p style="margin:0;font-size:17px;line-height:1.55;max-width:44ch;">{{ footer.newsletterText }}</p>
+        <a href="mailto:{{ footer.contactEmail }}?subject=Newsletter%20registration&amp;body=Please%20add%20me%20to%20the%20Oxford%20Newman%20Network%20newsletter." style="align-self:flex-start;margin-top:6px;display:inline-block;background:#C9B27C;color:#002147;padding:13px 22px;font-size:15px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;" style-hover="background:#F4EEE2;color:#002147;">{{ footer.buttonLabel }}</a>
       </div>
       <div style="display:flex;flex-direction:column;gap:10px;font-size:17px;line-height:1.5;">
         <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#C9B27C;">Contact</p>
-        <a href="mailto:Newmanseminars@gmail.com" style="color:#F4EEE2;">Newmanseminars@gmail.com</a>
+        <a href="mailto:{{ footer.contactEmail }}" style="color:#F4EEE2;">{{ footer.contactEmail }}</a>
       </div>
       <div style="display:flex;flex-direction:column;gap:10px;">
         <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#C9B27C;">Pages</p>
@@ -526,7 +520,7 @@ class Component extends DCLogic {
       when: 'To be announced', place: 'Oxford',
       title: 'A day conference on Newman and education',
       body: ['Following the naming of Newman as co-patron of the Church\u2019s educational mission, the Network is preparing a day conference on The Idea of a University and on his practice as a tutor and schoolmaster. Details will be announced here and in the newsletter.'],
-      href: 'mailto:Newmanseminars@gmail.com?subject=Newman%20and%20education%20conference', linkLabel: 'Ask to be kept informed',
+      href: 'mailto:{{ footer.contactEmail }}?subject=Newman%20and%20education%20conference', linkLabel: 'Ask to be kept informed',
       listLabel: 'In preparation',
       people: ['Call for papers — to follow', 'Venue and date — to be confirmed', 'Registration will open in the newsletter']
     }
@@ -555,6 +549,7 @@ class Component extends DCLogic {
 
   renderVals() {
     const p = this.state.page;
+    const fitFor = (v) => (String(v == null ? '' : v).trim().toLowerCase() === 'whole' ? 'contain' : 'cover');
     const focusPos = (v, dflt) => {
       const t = String(v == null ? '' : v).trim().toLowerCase();
       if (t === 'top') return '50% 0%';
@@ -583,6 +578,7 @@ class Component extends DCLogic {
         open,
         hasPhoto: !!n.photo,
         focusPos: focusPos(n.focus, '50% 50%'),
+        fit: fitFor(n.focus),
         hasExtract: !!(n.extract && n.extract.length),
         toggle: this.toggle(n.id),
         toggleLabel: open ? 'Close' : (n.extractLabel || 'Read more')
@@ -597,17 +593,30 @@ class Component extends DCLogic {
       ],
       photo: './assets/newman-preaching.jpg',
       photoCaption: '\u2018A Sketch from St Mary\u2019s\u2019 \u2014 Newman at the lectern of the University Church.',
-      datesHeading: 'Key dates', datesNote: 'A chronology of the Oxford years and after.'
+      datesHeading: 'Key dates', datesNote: 'A chronology of the Oxford years and after.',
+      datesFootnote: 'The fuller chronology of Newman\u2019s Oxford years, with places and sources, is being prepared for this page.'
     };
     const DEF_PICTURES = [
       { photo: './assets/bust-trinity.jpg', caption: 'The bust at Trinity College.' }
     ];
     const pageNewman = Object.assign({}, DEF_NEWMAN, c.pageNewman || {});
-    const pageNews = Object.assign({ kicker: 'News', heading: 'What is new in Newman' }, c.pageNews || {});
-    const pageSeminars = Object.assign({ kicker: 'Seminars', heading: 'The Newman Seminar', note: 'To receive the term card by email, write to' }, c.pageSeminars || {});
+    const pageNews = Object.assign({ kicker: 'News', heading: 'What is new in Newman', note: 'Proclamations, audiences, publications and gatherings \u2014 the events that mark Newman\u2019s place in the life of the Church and the University.' }, c.pageNews || {});
+    const pageSeminars = Object.assign({ kicker: 'Seminars', heading: 'The Newman Seminar', note: 'To receive the term card by email, write to', blurb: 'Seminars are free and open to all. Papers are followed by discussion and refreshments.', termNote: 'Details of speakers and papers will be posted here as they are confirmed.' }, c.pageSeminars || {});
     const pageConferences = Object.assign({ kicker: 'Conferences', heading: 'Conferences & panels', note: 'Gatherings the Network hosts or takes part in, in Oxford and elsewhere.' }, c.pageConferences || {});
-    const pagePeople = Object.assign({ kicker: 'People', heading: 'The Network', intro: ['The Network is a company of friends rather than an institution: scholars, students, clergy and readers who care about Newman.'] }, c.pagePeople || {});
+    const pagePeople = Object.assign({ kicker: 'People', heading: 'The Network', intro: ['The Network is a company of friends rather than an institution: scholars, students, clergy and readers who care about Newman.'], joinLine: 'If you would like to be listed, or to join the Network, write to' }, c.pagePeople || {});
     const newmanPictures = (c.newmanPictures && c.newmanPictures.length ? c.newmanPictures : DEF_PICTURES);
+    const DEF_CARDS = [
+      { label: 'Trinity \u00b7 1817', text: 'Newman came up to Trinity College at sixteen, and kept his rooms there in mind all his life.' },
+      { label: 'Oriel \u00b7 1822', text: 'Elected Fellow of Oriel \u2014 the turning point, he said, of his life.' },
+      { label: 'St Mary\u2019s \u00b7 1828\u201343', text: 'Vicar of the University Church, where his sermons drew Oxford to its four o\u2019clock service.' }
+    ];
+    const homeCards = (c.homeCards && c.homeCards.length ? c.homeCards : DEF_CARDS);
+    const footer = Object.assign({
+      newsletterHeading: 'Join the newsletter',
+      newsletterText: 'Term cards for the seminars, and occasional notices of events, book launches and conferences. We write a few times a term, never more.',
+      buttonLabel: 'Newmanseminars@gmail.com',
+      contactEmail: 'Newmanseminars@gmail.com'
+    }, c.footer || {});
     const s0 = seminars[0] || { week: '', title: '', speaker: '', where: '' };
     return {
       navItems,
@@ -617,17 +626,18 @@ class Component extends DCLogic {
       home, news, latestNews: news.slice(0, this.props.homeNewsCount ?? 3),
       heroPhoto: (home && home.photo) || './assets/newman-vintner.jpg',
       heroFocus: focusPos(home && home.focus, '50% 50%'),
-      pageNewman: Object.assign({}, pageNewman, { focusPos: focusPos(pageNewman.focus, '50% 50%') }),
-      newmanPictures: newmanPictures.map((x) => Object.assign({}, x, { focusPos: focusPos(x.focus, '50% 50%') })),
+      pageNewman: Object.assign({}, pageNewman, { focusPos: focusPos(pageNewman.focus, '50% 50%'), fit: fitFor(pageNewman.focus) }),
+      newmanPictures: newmanPictures.map((x) => Object.assign({}, x, { focusPos: focusPos(x.focus, '50% 50%'), fit: fitFor(x.focus) })),
+      homeCards: homeCards, footer: footer,
       pageNews: pageNews, pageSeminars: pageSeminars,
       pageConferences: pageConferences, pagePeople: pagePeople,
       heroCaption: (home && home.photoCaption) || 'John Henry Newman. Lithograph by J. A. Vintner, 1850, after a drawing by Maria Giberne, 1842.',
       currentTerm: term,
-      currentSeminars: seminars.map((x) => Object.assign({}, x, { hasPhoto: !!x.photo, focusPos: focusPos(x.focus, '50% 0%') })),
+      currentSeminars: seminars.map((x) => Object.assign({}, x, { hasPhoto: !!x.photo, focusPos: focusPos(x.focus, '50% 0%'), fit: fitFor(x.focus) })),
       pastTerms: pastTerms,
       chronology: chronology,
-      conferences: conferences.map((x) => Object.assign({}, x, { hasPhoto: !!x.photo, focusPos: focusPos(x.focus, '50% 50%') })),
-      people: people.map((x) => Object.assign({}, x, { hasPhoto: !!x.photo, focusPos: focusPos(x.focus, '50% 0%') })),
+      conferences: conferences.map((x) => Object.assign({}, x, { hasPhoto: !!x.photo, focusPos: focusPos(x.focus, '50% 50%'), fit: fitFor(x.focus) })),
+      people: people.map((x) => Object.assign({}, x, { hasPhoto: !!x.photo, focusPos: focusPos(x.focus, '50% 0%'), fit: fitFor(x.focus) })),
       nextSeminar: { when: term + ' · ' + s0.week, title: s0.title, speaker: s0.speaker, where: s0.where }
     };
   }
