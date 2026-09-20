@@ -154,8 +154,8 @@ class Component extends DCLogic {
 
   spec = {
     home: {
-      label: 'Home page', title: 'Home page', kind: 'object',
-      note: 'The three pieces of writing at the top of the home page.',
+      label: 'Home', title: 'Home page', kind: 'object',
+      note: 'The wording and picture at the top of the home page.',
       fields: [
         { key: 'kicker', label: 'Small line above the quotation', type: 'text' },
         { key: 'quote', label: 'Quotation', type: 'area', rows: 3, hint: 'Line breaks are kept exactly as you type them.' },
@@ -165,35 +165,48 @@ class Component extends DCLogic {
         { key: 'photoCaption', label: 'Caption under the photograph', type: 'text' }
       ]
     },
-    term: {
-      label: 'Current term', title: 'Current term', kind: 'string',
-      note: 'Shown above the seminar list and on the home page card.',
-      fields: [{ key: 'value', label: 'Term', type: 'text', hint: 'For example: Michaelmas Term 2026' }]
-    },
-    seminars: {
-      label: 'Seminars', title: "This term's seminars", kind: 'list', add: 'Add a seminar',
-      note: 'The first seminar in this list is the one shown on the home page.',
-      titleKey: 'title',
+    pageNewman: {
+      label: 'Newman', title: 'The Newman page', kind: 'object',
+      note: 'The wording and main picture on the Newman page.',
       fields: [
-        { key: 'week', label: 'Week', type: 'text', hint: 'For example: Week 3' },
-        { key: 'date', label: 'Date', type: 'text', hint: 'For example: 22 Oct' },
-        { key: 'title', label: 'Title of the paper', type: 'text' },
-        { key: 'speaker', label: 'Speaker', type: 'text' },
-        { key: 'where', label: 'Place and time', type: 'text' },
-        { key: 'photo', label: 'Photograph', type: 'image', hint: 'Optional. Nothing shows on the site if you leave this empty.' },
-        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre or bottom. Empty means top, so faces are not cut off.' }
+        { key: 'kicker', label: 'Small line above the heading', type: 'text' },
+        { key: 'heading', label: 'Heading', type: 'text' },
+        { key: 'paras', label: 'The writing', type: 'paras', rows: 10, hint: 'Leave a blank line between paragraphs.' },
+        { key: 'photo', label: 'Main picture', type: 'image', hint: 'Optional. Nothing shows on the site if you leave this empty.' },
+        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre or bottom.' },
+        { key: 'photoCaption', label: 'Caption under the main picture', type: 'text' },
+        { key: 'datesHeading', label: 'Heading above the chronology', type: 'text' },
+        { key: 'datesNote', label: 'Line beside that heading', type: 'text' }
       ]
     },
-    pastTerms: {
-      label: 'Previous terms', title: 'Previous terms', kind: 'list', add: 'Add a term',
-      note: 'Listed at the foot of the seminars page.', titleKey: 'term',
+    newmanPictures: {
+      label: 'Newman — pictures', title: 'Pictures on the Newman page', kind: 'list', add: 'Add a picture',
+      note: 'The row of pictures below the writing. The bust at Trinity, the statue at Oriel, and any others.',
       fields: [
-        { key: 'term', label: 'Term', type: 'text' },
-        { key: 'items', label: 'The seminars', type: 'pairs', rows: 12, hint: 'One per line: the date, a vertical bar, then the speaker and paper. 4 May (2nd Week) | Dr Serenhedd James, Winchester College, \u2018Turncoat to Treasure: Newman and Punch\u2019' }
+        { key: 'photo', label: 'Picture', type: 'image' },
+        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre or bottom.' },
+        { key: 'caption', label: 'Caption', type: 'text' }
+      ]
+    },
+    chronology: {
+      label: 'Newman \u2014 key dates', title: 'Key dates', kind: 'list', add: 'Add a period',
+      note: 'Each block is a period of Newman’s life with its dates beneath.', titleKey: 'heading',
+      fields: [
+        { key: 'heading', label: 'Period', type: 'text', hint: 'For example: Fellow and tutor of Oriel' },
+        { key: 'span', label: 'Years', type: 'text', hint: 'For example: 1822–1832' },
+        { key: 'items', label: 'The dates', type: 'pairs', rows: 10, hint: 'One per line: the year, a vertical bar, then what happened. 1822 | Elected Fellow of Oriel College.' }
+      ]
+    },
+    pageNews: {
+      label: 'News', title: 'The News page', kind: 'object',
+      note: 'The wording at the top of the News page.',
+      fields: [
+        { key: 'kicker', label: 'Small line above the heading', type: 'text' },
+        { key: 'heading', label: 'Heading', type: 'text' }
       ]
     },
     news: {
-      label: 'News', title: 'News', kind: 'list', add: 'Add a news item',
+      label: 'News \u2014 items', title: 'News items', kind: 'list', add: 'Add a news item',
       note: 'Newest first. The home page shows the first three.', titleKey: 'title',
       fields: [
         { key: 'date', label: 'Date', type: 'text', hint: 'For example: 1 Nov 2025' },
@@ -209,17 +222,53 @@ class Component extends DCLogic {
         { key: 'linkLabel', label: 'Words on the link', type: 'text' }
       ]
     },
-    chronology: {
-      label: 'Key dates', title: 'Key dates', kind: 'list', add: 'Add a period',
-      note: 'Each block is a period of Newman’s life with its dates beneath.', titleKey: 'heading',
+    pageSeminars: {
+      label: 'Seminars', title: 'The Seminars page', kind: 'object',
+      note: 'The wording at the top of the Seminars page.',
       fields: [
-        { key: 'heading', label: 'Period', type: 'text', hint: 'For example: Fellow and tutor of Oriel' },
-        { key: 'span', label: 'Years', type: 'text', hint: 'For example: 1822–1832' },
-        { key: 'items', label: 'The dates', type: 'pairs', rows: 10, hint: 'One per line: the year, a vertical bar, then what happened. 1822 | Elected Fellow of Oriel College.' }
+        { key: 'kicker', label: 'Small line above the heading', type: 'text' },
+        { key: 'heading', label: 'Heading', type: 'text' },
+        { key: 'note', label: 'Line below the heading', type: 'text' }
+      ]
+    },
+    term: {
+      label: 'Seminars \u2014 current term', title: 'Current term', kind: 'string',
+      note: 'Shown above the seminar list and on the home page card.',
+      fields: [{ key: 'value', label: 'Term', type: 'text', hint: 'For example: Michaelmas Term 2026' }]
+    },
+    seminars: {
+      label: 'Seminars \u2014 this term', title: "This term's seminars", kind: 'list', add: 'Add a seminar',
+      note: 'The first seminar in this list is the one shown on the home page.',
+      titleKey: 'title',
+      fields: [
+        { key: 'week', label: 'Week', type: 'text', hint: 'For example: Week 3' },
+        { key: 'date', label: 'Date', type: 'text', hint: 'For example: 22 Oct' },
+        { key: 'title', label: 'Title of the paper', type: 'text' },
+        { key: 'speaker', label: 'Speaker', type: 'text' },
+        { key: 'where', label: 'Place and time', type: 'text' },
+        { key: 'photo', label: 'Photograph', type: 'image', hint: 'Optional. Nothing shows on the site if you leave this empty.' },
+        { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre or bottom. Empty means top, so faces are not cut off.' }
+      ]
+    },
+    pastTerms: {
+      label: 'Seminars \u2014 previous terms', title: 'Previous terms', kind: 'list', add: 'Add a term',
+      note: 'Listed at the foot of the seminars page.', titleKey: 'term',
+      fields: [
+        { key: 'term', label: 'Term', type: 'text' },
+        { key: 'items', label: 'The seminars', type: 'pairs', rows: 12, hint: 'One per line: the date, a vertical bar, then the speaker and paper. 4 May (2nd Week) | Dr Serenhedd James, Winchester College, \u2018Turncoat to Treasure: Newman and Punch\u2019' }
+      ]
+    },
+    pageConferences: {
+      label: 'Conferences', title: 'The Conferences page', kind: 'object',
+      note: 'The wording at the top of the Conferences page.',
+      fields: [
+        { key: 'kicker', label: 'Small line above the heading', type: 'text' },
+        { key: 'heading', label: 'Heading', type: 'text' },
+        { key: 'note', label: 'Line below the heading', type: 'text' }
       ]
     },
     conferences: {
-      label: 'Conferences', title: 'Conferences', kind: 'list', add: 'Add a conference',
+      label: 'Conferences \u2014 entries', title: 'Conferences', kind: 'list', add: 'Add a conference',
       note: 'Gatherings the Network hosts or takes part in.', titleKey: 'title',
       fields: [
         { key: 'when', label: 'Date', type: 'text' },
@@ -234,8 +283,17 @@ class Component extends DCLogic {
         { key: 'focus', label: 'Which part of the photograph to keep', type: 'text', hint: 'If it has to be cropped: type top, centre or bottom. Empty means centre.' }
       ]
     },
+    pagePeople: {
+      label: 'People', title: 'The People page', kind: 'object',
+      note: 'The wording at the top of the People page.',
+      fields: [
+        { key: 'kicker', label: 'Small line above the heading', type: 'text' },
+        { key: 'heading', label: 'Heading', type: 'text' },
+        { key: 'intro', label: 'The writing below the heading', type: 'paras', rows: 5, hint: 'Leave a blank line between paragraphs.' }
+      ]
+    },
     people: {
-      label: 'People', title: 'People', kind: 'list', add: 'Add a person',
+      label: 'People \u2014 entries', title: 'People', kind: 'list', add: 'Add a person',
       note: 'Names, roles and photographs of members of the Network.', titleKey: 'name',
       fields: [
         { key: 'name', label: 'Name', type: 'text' },

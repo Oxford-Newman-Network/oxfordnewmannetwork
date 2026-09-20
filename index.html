@@ -134,8 +134,8 @@
 
   <sc-if value="{{ isNews }}" hint-placeholder-val="{{ false }}">
     <section data-screen-label="News" style="animation:rise .5s ease-out both;max-width:1160px;margin:0 auto;padding:48px 28px 0;">
-      <p style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">News</p>
-      <h1 style="margin:0 0 12px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,5vw,60px);line-height:1;color:#002147;">What is new in Newman</h1>
+      <p style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">{{ pageNews.kicker }}</p>
+      <h1 style="margin:0 0 12px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,5vw,60px);line-height:1;color:#002147;">{{ pageNews.heading }}</h1>
       <p style="margin:0 0 40px;font-size:20px;line-height:1.5;max-width:60ch;color:#3A352C;">Proclamations, audiences, publications and gatherings — the events that mark Newman's place in the life of the Church, the colleges and the world of letters.</p>
       <div style="display:flex;flex-direction:column;">
         <sc-for list="{{ news }}" as="n" hint-placeholder-count="0">
@@ -181,11 +181,11 @@
     <section data-screen-label="Seminars" style="animation:rise .5s ease-out both;max-width:1160px;margin:0 auto;padding:48px 28px 0;">
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px 64px;align-items:start;">
         <div>
-          <p style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">Seminars</p>
-          <h1 style="margin:0 0 18px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,5vw,60px);line-height:1;color:#002147;">The Newman Seminar</h1>
+          <p style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">{{ pageSeminars.kicker }}</p>
+          <h1 style="margin:0 0 18px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,5vw,60px);line-height:1;color:#002147;">{{ pageSeminars.heading }}</h1>
           <p style="margin:0 0 14px;font-size:20px;line-height:1.5;color:#3A352C;text-wrap:pretty;">Each term the Network gathers for a series of papers on Newman — his theology, his prose and verse, his Oxford, his afterlife in the Church and the academy. Speakers come from across the colleges and from far beyond them; the audience is anyone with an interest, and questions are warmly encouraged.</p>
           <p style="margin:0 0 14px;font-size:18px;line-height:1.5;color:#5A5348;">Seminars are free and open to all. Papers are followed by discussion and refreshments. In time we hope speakers may share the text of their papers here.</p>
-          <p style="margin:0;font-size:18px;line-height:1.5;color:#5A5348;">To receive the term card by email, write to <a href="mailto:Newmanseminars@gmail.com?subject=Newsletter%20registration">Newmanseminars@gmail.com</a>.</p>
+          <p style="margin:0;font-size:18px;line-height:1.5;color:#5A5348;">{{ pageSeminars.note }} <a href="mailto:Newmanseminars@gmail.com?subject=Newsletter%20registration">Newmanseminars@gmail.com</a>.</p>
         </div>
         <div>
           <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-bottom:2px solid #002147;padding-bottom:10px;margin-bottom:4px;">
@@ -233,31 +233,33 @@
 
   <sc-if value="{{ isNewman }}" hint-placeholder-val="{{ false }}">
     <section data-screen-label="Newman at Oxford" style="animation:rise .5s ease-out both;max-width:1160px;margin:0 auto;padding:48px 28px 0;">
-      <p style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">Newman</p>
-      <h1 style="margin:0 0 16px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,5vw,60px);line-height:1;color:#002147;">Newman at Oxford</h1>
+      <p style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">{{ pageNewman.kicker }}</p>
+      <h1 style="margin:0 0 16px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,5vw,60px);line-height:1;color:#002147;">{{ pageNewman.heading }}</h1>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px 56px;align-items:start;">
         <div style="display:flex;flex-direction:column;gap:14px;">
-          <p style="margin:0;font-size:20px;line-height:1.55;color:#3A352C;text-wrap:pretty;">Newman came up to Trinity College in June 1817, a boy of sixteen, and Oxford held him for the next twenty-eight years. He read widely and nervously, took a disappointing fourth in 1820, and then in 1822 was elected Fellow of Oriel — the event he called the turning point of his life.</p>
-          <p style="margin:0;font-size:18px;line-height:1.55;color:#3A352C;text-wrap:pretty;">As Vicar of St Mary the Virgin from 1828 he preached the sermons that emptied other churches at four o'clock on Sunday afternoons; as tutor, then as the leading voice of the Oxford Movement, he made the city the centre of a religious argument that ran through the 1830s. He left for Littlemore in 1842 and for Rome in 1845, and did not return for thirty-two years — coming back in 1878 as the first Honorary Fellow of Trinity, the college he had loved best.</p>
-          <p style="margin:0;font-size:18px;line-height:1.55;color:#5A5348;">Today a statue stands in the front quadrangle of Oriel and a bust in the garden at Trinity — the two colleges that between them shaped an Oxford life.</p>
+          <sc-for list="{{ pageNewman.paras }}" as="para" hint-placeholder-count="3">
+            <p style="margin:0;font-size:18px;line-height:1.55;color:#3A352C;text-wrap:pretty;">{{ para }}</p>
+          </sc-for>
         </div>
         <div style="display:flex;flex-direction:column;gap:10px;">
-          <img src="./assets/newman-preaching.jpg" alt="Newman preaching in the University Church of St Mary the Virgin" style="width:100%;height:auto;display:block;border:8px solid #FFFDF8;box-shadow:0 16px 34px rgba(0,33,71,.18);">
-          <p style="margin:0;font-size:13px;line-height:1.45;font-style:italic;color:#7A756A;">‘A Sketch from St Mary's’ — Newman at the lectern of the University Church.</p>
+          <img data-photo-frame src="{{ pageNewman.photo }}" alt="" style="width:100%;height:auto;display:block;object-position:{{ pageNewman.focusPos }};border:8px solid #FFFDF8;box-shadow:0 14px 30px rgba(0,33,71,.16);">
+          <p style="margin:0;font-size:13px;line-height:1.45;font-style:italic;color:#7A756A;">{{ pageNewman.photoCaption }}</p>
         </div>
       </div>
 
       <div style="margin-top:48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;">
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <img src="./assets/bust-trinity.jpg" alt="Bust of Cardinal Newman at Trinity College, Oxford" style="width:100%;height:280px;object-fit:cover;display:block;">
-          <p style="margin:0;font-size:13px;font-style:italic;color:#7A756A;">The bust at Trinity College.</p>
-        </div>
+        <sc-for list="{{ newmanPictures }}" as="pic" hint-placeholder-count="2">
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <img data-photo-frame src="{{ pic.photo }}" alt="" style="width:100%;height:280px;object-fit:cover;object-position:{{ pic.focusPos }};display:block;">
+            <p style="margin:0;font-size:13px;font-style:italic;color:#7A756A;">{{ pic.caption }}</p>
+          </div>
+        </sc-for>
       </div>
 
       <div style="margin-top:64px;border-top:1px solid #C9B27C;padding-top:30px;">
         <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:8px;">
-          <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:36px;line-height:1;color:#002147;">Key dates</h2>
-          <span style="font-size:15px;font-style:italic;color:#7A756A;">A chronology of the Oxford years and after.</span>
+          <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:36px;line-height:1;color:#002147;">{{ pageNewman.datesHeading }}</h2>
+          <span style="font-size:15px;font-style:italic;color:#7A756A;">{{ pageNewman.datesNote }}</span>
         </div>
         <sc-for list="{{ chronology }}" as="era" hint-placeholder-count="4">
           <div style="margin-top:36px;">
@@ -282,9 +284,9 @@
 
   <sc-if value="{{ isConferences }}" hint-placeholder-val="{{ false }}">
     <section data-screen-label="Conferences" style="animation:rise .5s ease-out both;max-width:1160px;margin:0 auto;padding:48px 28px 0;">
-      <p style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">Conferences</p>
-      <h1 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,5vw,60px);line-height:1;color:#002147;">Conferences &amp; panels</h1>
-      <p style="margin:0 0 40px;font-size:20px;line-height:1.5;max-width:60ch;color:#3A352C;">Gatherings the Network hosts or takes part in, in Oxford and elsewhere.</p>
+      <p style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">{{ pageConferences.kicker }}</p>
+      <h1 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,5vw,60px);line-height:1;color:#002147;">{{ pageConferences.heading }}</h1>
+      <p style="margin:0 0 40px;font-size:20px;line-height:1.5;max-width:60ch;color:#3A352C;">{{ pageConferences.note }}</p>
       <div style="display:flex;flex-direction:column;">
         <sc-for list="{{ conferences }}" as="c" hint-placeholder-count="2">
           <article style="border-top:1px solid #C9B27C;padding:36px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px 48px;align-items:start;">
@@ -315,9 +317,13 @@
 
   <sc-if value="{{ isPeople }}" hint-placeholder-val="{{ false }}">
     <section data-screen-label="People" style="animation:rise .5s ease-out both;max-width:1160px;margin:0 auto;padding:48px 28px 0;">
-      <p style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">People</p>
+      <p style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">{{ pagePeople.kicker }}</p>
       <h1 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,5vw,60px);line-height:1;color:#002147;">The Network</h1>
-      <p style="margin:0 0 40px;font-size:20px;line-height:1.5;max-width:62ch;color:#3A352C;text-wrap:pretty;">The Network is a company of friends rather than an institution: scholars, students, clergy and readers who care about Newman and meet to read him together. Names and short biographies will be added here with their owners' consent.</p>
+      <div style="margin:0 0 40px;display:flex;flex-direction:column;gap:12px;max-width:62ch;">
+        <sc-for list="{{ pagePeople.intro }}" as="para" hint-placeholder-count="1">
+          <p style="margin:0;font-size:20px;line-height:1.5;color:#3A352C;text-wrap:pretty;">{{ para }}</p>
+        </sc-for>
+      </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;border-top:1px solid #C9B27C;padding-top:36px;">
         <sc-for list="{{ people }}" as="m" hint-placeholder-count="3">
           <div style="display:flex;flex-direction:column;gap:12px;">
@@ -352,7 +358,6 @@
       <div style="display:flex;flex-direction:column;gap:10px;font-size:17px;line-height:1.5;">
         <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#C9B27C;">Contact</p>
         <a href="mailto:Newmanseminars@gmail.com" style="color:#F4EEE2;">Newmanseminars@gmail.com</a>
-        <p style="margin:0;">Seminars are held in the MacGregor Room, Oriel College, Oxford.</p>
       </div>
       <div style="display:flex;flex-direction:column;gap:10px;">
         <p style="margin:0;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#C9B27C;">Pages</p>
@@ -583,6 +588,26 @@ class Component extends DCLogic {
         toggleLabel: open ? 'Close' : (n.extractLabel || 'Read more')
       });
     });
+    const DEF_NEWMAN = {
+      kicker: 'Newman', heading: 'Newman at Oxford',
+      paras: [
+        'Newman came up to Trinity College in June 1817, a boy of sixteen, and Oxford held him for the next twenty-eight years.',
+        'As Vicar of St Mary the Virgin from 1828 he preached the sermons that emptied other churches at four o\u2019clock on Sunday afternoons.',
+        'Today a statue stands in the front quadrangle of Oriel and a bust in the garden at Trinity \u2014 the two colleges that between them shaped an Oxford life.'
+      ],
+      photo: './assets/newman-preaching.jpg',
+      photoCaption: '\u2018A Sketch from St Mary\u2019s\u2019 \u2014 Newman at the lectern of the University Church.',
+      datesHeading: 'Key dates', datesNote: 'A chronology of the Oxford years and after.'
+    };
+    const DEF_PICTURES = [
+      { photo: './assets/bust-trinity.jpg', caption: 'The bust at Trinity College.' }
+    ];
+    const pageNewman = Object.assign({}, DEF_NEWMAN, c.pageNewman || {});
+    const pageNews = Object.assign({ kicker: 'News', heading: 'What is new in Newman' }, c.pageNews || {});
+    const pageSeminars = Object.assign({ kicker: 'Seminars', heading: 'The Newman Seminar', note: 'To receive the term card by email, write to' }, c.pageSeminars || {});
+    const pageConferences = Object.assign({ kicker: 'Conferences', heading: 'Conferences & panels', note: 'Gatherings the Network hosts or takes part in, in Oxford and elsewhere.' }, c.pageConferences || {});
+    const pagePeople = Object.assign({ kicker: 'People', heading: 'The Network', intro: ['The Network is a company of friends rather than an institution: scholars, students, clergy and readers who care about Newman.'] }, c.pagePeople || {});
+    const newmanPictures = (c.newmanPictures && c.newmanPictures.length ? c.newmanPictures : DEF_PICTURES);
     const s0 = seminars[0] || { week: '', title: '', speaker: '', where: '' };
     return {
       navItems,
@@ -592,6 +617,10 @@ class Component extends DCLogic {
       home, news, latestNews: news.slice(0, this.props.homeNewsCount ?? 3),
       heroPhoto: (home && home.photo) || './assets/newman-vintner.jpg',
       heroFocus: focusPos(home && home.focus, '50% 50%'),
+      pageNewman: Object.assign({}, pageNewman, { focusPos: focusPos(pageNewman.focus, '50% 50%') }),
+      newmanPictures: newmanPictures.map((x) => Object.assign({}, x, { focusPos: focusPos(x.focus, '50% 50%') })),
+      pageNews: pageNews, pageSeminars: pageSeminars,
+      pageConferences: pageConferences, pagePeople: pagePeople,
       heroCaption: (home && home.photoCaption) || 'John Henry Newman. Lithograph by J. A. Vintner, 1850, after a drawing by Maria Giberne, 1842.',
       currentTerm: term,
       currentSeminars: seminars.map((x) => Object.assign({}, x, { hasPhoto: !!x.photo, focusPos: focusPos(x.focus, '50% 0%') })),
