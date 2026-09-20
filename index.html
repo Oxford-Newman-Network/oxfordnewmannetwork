@@ -244,7 +244,7 @@
       <div style="margin-top:48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;">
         <sc-for list="{{ newmanPictures }}" as="pic" hint-placeholder-count="2">
           <div style="display:flex;flex-direction:column;gap:8px;">
-            <img data-photo-frame src="{{ pic.photo }}" alt="" style="width:100%;height:280px;object-fit:{{ pic.fit }};object-position:{{ pic.focusPos }};display:block;">
+            <img data-photo-frame src="{{ pic.photo }}" alt="" style="width:100%;height:340px;object-fit:{{ pic.fit }};object-position:{{ pic.focusPos }};display:block;">
             <p style="margin:0;font-size:13px;font-style:italic;color:#7A756A;">{{ pic.caption }}</p>
           </div>
         </sc-for>
@@ -549,7 +549,12 @@ class Component extends DCLogic {
 
   renderVals() {
     const p = this.state.page;
-    const fitFor = (v) => (String(v == null ? '' : v).trim().toLowerCase() === 'whole' ? 'contain' : 'cover');
+    const fitFor = (v, dflt) => {
+      const t = String(v == null ? '' : v).trim().toLowerCase();
+      if (t === 'whole') return 'contain';
+      if (t === 'top' || t === 'bottom' || t === 'centre' || t === 'center' || t === 'middle') return 'cover';
+      return dflt || 'cover';
+    };
     const focusPos = (v, dflt) => {
       const t = String(v == null ? '' : v).trim().toLowerCase();
       if (t === 'top') return '50% 0%';
@@ -627,7 +632,7 @@ class Component extends DCLogic {
       heroPhoto: (home && home.photo) || './assets/newman-vintner.jpg',
       heroFocus: focusPos(home && home.focus, '50% 50%'),
       pageNewman: Object.assign({}, pageNewman, { focusPos: focusPos(pageNewman.focus, '50% 50%'), fit: fitFor(pageNewman.focus) }),
-      newmanPictures: newmanPictures.map((x) => Object.assign({}, x, { focusPos: focusPos(x.focus, '50% 50%'), fit: fitFor(x.focus) })),
+      newmanPictures: newmanPictures.map((x) => Object.assign({}, x, { focusPos: focusPos(x.focus, '50% 50%'), fit: fitFor(x.focus, 'contain') })),
       homeCards: homeCards, footer: footer,
       pageNews: pageNews, pageSeminars: pageSeminars,
       pageConferences: pageConferences, pagePeople: pagePeople,
