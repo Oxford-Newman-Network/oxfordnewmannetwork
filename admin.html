@@ -305,7 +305,12 @@ class Component extends DCLogic {
     }
   };
 
-  order = ['home', 'term', 'seminars', 'pastTerms', 'news', 'chronology', 'conferences', 'people'];
+  order = ['home',
+    'pageNewman', 'newmanPictures', 'chronology',
+    'pageNews', 'news',
+    'pageSeminars', 'term', 'seminars', 'pastTerms',
+    'pageConferences', 'conferences',
+    'pagePeople', 'people'];
 
   componentDidMount() {
     import('./onn-data.js').then((m) => {
