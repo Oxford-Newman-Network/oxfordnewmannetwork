@@ -312,7 +312,7 @@
   <sc-if value="{{ isPeople }}" hint-placeholder-val="{{ false }}">
     <section data-screen-label="People" style="animation:rise .5s ease-out both;max-width:1160px;margin:0 auto;padding:48px 28px 0;">
       <p style="margin:0 0 10px;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#7A1E2C;">{{ pagePeople.kicker }}</p>
-      <h1 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,5vw,60px);line-height:1;color:#002147;">The Network</h1>
+      <h1 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(40px,5vw,60px);line-height:1;color:#002147;">{{ pagePeople.heading }}</h1>
       <div style="margin:0 0 40px;display:flex;flex-direction:column;gap:12px;max-width:62ch;">
         <sc-for list="{{ pagePeople.intro }}" as="para" hint-placeholder-count="1">
           <p style="margin:0;font-size:20px;line-height:1.5;color:#3A352C;text-wrap:pretty;">{{ para }}</p>
