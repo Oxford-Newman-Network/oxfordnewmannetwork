@@ -1,3 +1,17 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "oxfordnewmannetwork.vercel.app" }],
+      "destination": "https://oxfordnewmannetwork.org/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.oxfordnewmannetwork.org" }],
+      "destination": "https://oxfordnewmannetwork.org/:path*",
+      "permanent": true
+    }
+  ]
 }
